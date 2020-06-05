@@ -4,18 +4,32 @@
     <meta charset="UTF-8">
     <title>WebShlomo</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    
+    <script id="contentScript" type="text/x-handlebars-template">
+        <ul class="List" id="someList">
+            <li class="titleInList">Expences</li>
+            {{#each expences}}
+            <li>{{this.name}}</li>
+            {{/each}}
+        </ul>
+        <ul class="List">
+            <li class="titleInList">Income</li>
+            {{#each income}}
+            <li>{{this.name}}</li>
+            {{/each}}
+        </ul>
+
+    </script>
+
 </head>
 
 <body>
     <div class="content">
-        <h3>Expences</h3>
         <div class="lines" id="redLines"></div>
-        <ul class="List" id="someList">
-            <li>Sex</li>
-            <li>Drugs</li>
-            <li>Rock'n'Roll</li>
-            <li>The Bible</li>
-        </ul>
+        <div id="content">
+            <!--Content goes here :)-->
+        </div>
     </div>
 <script src="main.js"></script>
 </body>
