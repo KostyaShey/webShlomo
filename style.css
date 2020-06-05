@@ -1,33 +1,39 @@
 body {
     background-color: #f5f5f5;
-    width: 600px;
+    width: 80%;
     margin: 0 auto;
     padding: 0;
+    background-image: url('https://s18670.pcdn.co/wp-content/uploads/Untitled-design-41-1.png');
+    display: flex;
 }
 
 h3 {
     font-family: courier, monospace;
+    font-size: 2em;
 }
 
 .content {
     margin-top: 1%;
+    flex-grow: 1;
 }
 
 .list {
     color: #555;
-    font-size: 22px;
+    font-size: 2em;
     padding: 0 !important;
-    width: 500px;
+    width: 100%;
     font-family: courier, monospace;
     border: 1px solid #dedede;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
 }
 
 .list li {
     list-style: none;
     border-bottom: 1px dotted #ccc;
     height: auto;
-    padding: 10px 10px 10px 60px;
+    padding: 1% 1% 1% 10%;
     text-transform: capitalize;
+    background-color: azure;
 }
 
         .list li:hover {
@@ -44,5 +50,5 @@ h3 {
     width: 2px;
     float: left;
     height: 495px;
-    margin-left: 40px;
+    margin-left: 6%;
 }
