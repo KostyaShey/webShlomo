@@ -7,18 +7,44 @@
     <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
     
     <script id="contentScript" type="text/x-handlebars-template">
-        <ul class="List" id="someList">
-            <li class="titleInList">Expences</li>
+        <table>
+            <thead></thead>
+            <tr>
+                <th rowspan="0" id="firstColumn"></th>
+                <th rowspan="0" id="redLines"></th>
+                <th></th>
+            </tr>
             {{#each expences}}
-            <li>{{this.name}}</li>
+            {{#if @first}}
+            <tr>
+                <td class="boldText">
+                    Expences
+                </td>
+            </tr>
+            {{/if}}
+            <tr>
+                <td>
+                    {{this.name}}
+                </td>
+            </tr>
             {{/each}}
-        </ul>
-        <ul class="List">
-            <li class="titleInList">Income</li>
             {{#each income}}
-            <li>{{this.name}}</li>
+                {{#if @first}}
+                    <tr>
+                        <td class="boldText">
+                            Income
+                        </td>
+                    </tr>
+                {{/if}}
+            <tr>
+                <td>
+                    {{this.name}}
+                </td>
+            </tr>
             {{/each}}
-        </ul>
+            
+              
+            </table>
 
     </script>
 

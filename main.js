@@ -18,9 +18,3 @@ const template = Handlebars.compile(siteContentScource);
 const compiledHtml = template(content);
 
 document.getElementById('content').innerHTML = compiledHtml;
-
-
-verticalRedLines = document.getElementById('redLines');
-list = document.getElementById('someList');
-lineHeight = list.offsetHeight *2;
-verticalRedLines.style.height = lineHeight;
