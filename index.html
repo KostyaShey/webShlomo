@@ -5,6 +5,8 @@
     <title>WebShlomo</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <script src="https://kit.fontawesome.com/040481a9b2.js" crossorigin="anonymous"></script>
+
     
     <script id="contentScript" type="text/x-handlebars-template">
         <table>
@@ -21,7 +23,7 @@
                     Expences
                 </td>
                 <td>
-                    
+                    <i class="fas fa-plus-circle"></i>
                 </td>
             </tr>
             {{/if}}
@@ -31,6 +33,9 @@
                 </td>
                 <td class="columnWithValues">
                     {{this.value}}
+                </td>
+                <td class="deleteColumn">
+                    <i class="far fa-trash-alt"></i>
                 </td>
             </tr>
             {{#if @last}}
@@ -51,7 +56,7 @@
                             Income
                         </td>
                         <td>
-                    
+                            <i class="fas fa-plus-circle"></i>
                         </td>
                     </tr>
                 {{/if}}
@@ -61,6 +66,9 @@
                 </td>
                 <td class="columnWithValues">
                     {{this.value}}
+                </td>
+                <td class="deleteColumn">
+                    <i class="far fa-trash-alt"></i>
                 </td>
             </tr>
             {{#if @last}}
