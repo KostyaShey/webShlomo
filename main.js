@@ -9,7 +9,15 @@ const content = {
         { name: 'Hustle', value: 100 },
         { name: 'Hustle', value: 100 },
         { name: 'Hustle', value: 100 },
-    ]
+    ],
+    sum: function (array) {
+        let total = 0;
+        for (i = 0; i < array.length; i++) {
+            total += array[i].value;
+        }
+        return total;
+    },
+
 }
 
 const siteContent = document.getElementById('contentScript');
@@ -18,3 +26,6 @@ const template = Handlebars.compile(siteContentScource);
 const compiledHtml = template(content);
 
 document.getElementById('content').innerHTML = compiledHtml;
+
+document.getElementById('expencesSum').innerHTML = content.sum(content.expences);
+document.getElementById('incomeSum').innerHTML = content.sum(content.income);

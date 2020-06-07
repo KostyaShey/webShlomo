@@ -20,13 +20,29 @@
                 <td class="boldText">
                     Expences
                 </td>
+                <td>
+                    
+                </td>
             </tr>
             {{/if}}
             <tr>
                 <td>
                     {{this.name}}
                 </td>
+                <td class="columnWithValues">
+                    {{this.value}}
+                </td>
             </tr>
+            {{#if @last}}
+                <tr>
+                    <td class="boldText">
+                        Sum
+                    </td>
+                    <td id="expencesSum" class="boldText columnWithValues">
+                        
+                    </td>
+                </tr>
+            {{/if}}
             {{/each}}
             {{#each income}}
                 {{#if @first}}
@@ -34,13 +50,29 @@
                         <td class="boldText">
                             Income
                         </td>
+                        <td>
+                    
+                        </td>
                     </tr>
                 {{/if}}
             <tr>
                 <td>
                     {{this.name}}
                 </td>
+                <td class="columnWithValues">
+                    {{this.value}}
+                </td>
             </tr>
+            {{#if @last}}
+                <tr>
+                    <td class="boldText">
+                        Sum
+                    </td>
+                    <td id="incomeSum" class="boldText columnWithValues">
+                        
+                    </td>
+                </tr>
+            {{/if}}
             {{/each}}
             
               
@@ -52,7 +84,6 @@
 
 <body>
     <div class="content">
-        <div class="lines" id="redLines"></div>
         <div id="content">
             <!--Content goes here :)-->
         </div>
