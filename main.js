@@ -27,5 +27,5 @@ const compiledHtml = template(content);
 
 document.getElementById('content').innerHTML = compiledHtml;
 
-document.getElementById('expencesSum').innerHTML = content.sum(content.expences);
-document.getElementById('incomeSum').innerHTML = content.sum(content.income);
+document.getElementById('expencesSum').innerHTML = content.sum(content.expences).toString() + ' &euro;';
+document.getElementById('incomeSum').innerHTML = content.sum(content.income).toString() + ' &euro;';
