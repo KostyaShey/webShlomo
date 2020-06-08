@@ -16,12 +16,10 @@ const content = {
     data: [{ nameType: 'Expences', tableData: expences, idType: 'expencesSum' },
         { nameType: 'Income', tableData: income, idType: 'incomeSum' }
     ],
+
     sum: function (array) {
-        let total = 0;
-        for (i = 0; i < array.length; i++) {
-            total += array[i].value;
-        }
-        return total;
+        let valueSum = array.reduce((currentSum, array) => currentSum + array.value, 0);
+        return valueSum;
     },
 }
 
