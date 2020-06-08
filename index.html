@@ -16,26 +16,66 @@
                 <th rowspan="0" id="redLines"></th>
                 <th></th>
             </tr>
-            {{#each expences}}
-            {{#if @first}}
-            <tr>
-                <td class="boldText" colspan="3">
-                    Expences
-                </td>
-            </tr>
-            {{/if}}
-            <tr>
-                <td>
-                    {{this.name}}
-                </td>
-                <td class="columnWithValues">
-                    {{this.value}} €
-                </td>
-                <td class="deleteColumn">
-                    <i class="far fa-trash-alt"></i>
-                </td>
-            </tr>
-            {{#if @last}}
+            {{#each data}}
+                <tr>
+                    <td class="boldText" colspan="3">
+                        {{this.nameType}}
+                    </td>
+                </tr>
+                    {{#each this.tableData}}
+                        <tr>
+                            <td>
+                                {{this.name}}
+                            </td>
+                            <td class="columnWithValues">
+                                {{this.value}} €
+                            </td>
+                            <td class="deleteColumn">
+                                <i class="far fa-trash-alt"></i>
+                            </td>
+                        </tr>
+                    {{/each}}
+                    <tr>
+                        <td colspan="3">
+                            <i class="fas fa-plus-circle"></i> Add Expence
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="boldText">
+                            Sum
+                        </td>
+                        <td id={{this.idType}} class="boldText columnWithValues" colspan="2"></td>
+                    </tr>
+            {{/each}}
+            </table>
+
+            <table>
+                <thead></thead>
+                <tr>
+                    <th rowspan="0" id="firstColumn"></th>
+                    <th rowspan="0" id="redLines"></th>
+                    <th></th>
+                </tr>
+                {{#each expences}}
+                {{#if @first}}
+                <tr>
+                    <td class="boldText" colspan="3">
+                        Expences
+                    </td>
+                </tr>
+                {{/if}}
+                <tr>
+                    <td>
+                        {{this.name}}
+                    </td>
+                    <td class="columnWithValues">
+                        {{this.value}} €
+                    </td>
+                    <td class="deleteColumn">
+                        <i class="far fa-trash-alt"></i>
+                    </td>
+                </tr>
+                {{#if @last}}
                 <tr>
                     <td colspan="3">
                         <i class="fas fa-plus-circle"></i> Add Expence
@@ -45,32 +85,30 @@
                     <td class="boldText">
                         Sum
                     </td>
-                    <td id="expencesSum" class="boldText columnWithValues" colspan="2">
-                        
+                    <td id="expencesSum" class="boldText columnWithValues" colspan="2"></td>
+                </tr>
+                {{/if}}
+                {{/each}}
+                {{#each income}}
+                {{#if @first}}
+                <tr>
+                    <td class="boldText" colspan="3">
+                        Income
                     </td>
                 </tr>
-            {{/if}}
-            {{/each}}
-            {{#each income}}
-                {{#if @first}}
-                    <tr>
-                        <td class="boldText" colspan="3">
-                            Income
-                        </td>
-                    </tr>
                 {{/if}}
-            <tr>
-                <td>
-                    {{this.name}}
-                </td>
-                <td class="columnWithValues">
-                    {{this.value}} €
-                </td>
-                <td class="deleteColumn">
-                    <i class="far fa-trash-alt"></i>
-                </td>
-            </tr>
-            {{#if @last}}
+                <tr>
+                    <td>
+                        {{this.name}}
+                    </td>
+                    <td class="columnWithValues">
+                        {{this.value}} €
+                    </td>
+                    <td class="deleteColumn">
+                        <i class="far fa-trash-alt"></i>
+                    </td>
+                </tr>
+                {{#if @last}}
                 <tr>
                     <td colspan="3">
                         <i class="fas fa-plus-circle"></i> Add Income
@@ -80,17 +118,15 @@
                     <td class="boldText">
                         Sum
                     </td>
-                    <td id="incomeSum" class="boldText columnWithValues" colspan="2">
-                        
-                    </td>
+                    <td id="incomeSum" class="boldText columnWithValues" colspan="2"></td>
                 </tr>
-            {{/if}}
-            {{/each}}
-            
-              
+                {{/if}}
+                {{/each}}
+
+
             </table>
 
-    </script>
+</script>
 
 </head>
 
