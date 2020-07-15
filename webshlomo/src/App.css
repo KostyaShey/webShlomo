@@ -29,7 +29,7 @@ p {
 
 .leftBorder {
   display: inline-block;
-  flex-grow: 0.1;
+  flex-basis: 100px;
   border-right: thick double #ffaa9f;
   padding-top: 1.5em;
   padding-bottom: 1.5em;
@@ -37,18 +37,18 @@ p {
 
 .title {
   display: inline-block;
-  flex-grow: 0.7;
+  flex-basis: 1000px;
 
 }
 
 .value {
   display: inline-block;
-  flex-grow: 0.1;
+  flex-basis: 200px;
 }
 
 .button {
   display: inline-block;
-  flex-grow: 0.1;
+  flex-basis: 200px;
 }
 
 .row:hover {
