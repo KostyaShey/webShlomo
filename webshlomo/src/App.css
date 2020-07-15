@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  margin: 2%;
+  margin: 5%;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -12,7 +12,8 @@
 p {
   color: #000;
   text-align: left;
-  padding: 0em 2em;
+  padding: 0em 0em 0em 1em;
+  font-size: 1.2em;
 }
 
 .monthTable {
@@ -33,6 +34,7 @@ p {
   border-right: thick double #ffaa9f;
   padding-top: 1.5em;
   padding-bottom: 1.5em;
+  min-width: 7%;
 }
 
 .title {
@@ -44,6 +46,8 @@ p {
 .value {
   display: inline-block;
   flex-basis: 200px;
+  white-space: nowrap;
+  max-width: 15%;
 }
 
 .button {

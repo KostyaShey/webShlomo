@@ -17,17 +17,20 @@ function App() {
       { name: 'Hustle', value: 100 },
   ];
 
-  function buildTitleRow(name) {
-    return (
-      <div className="row">
-          <div className="leftBorder"></div>
-          <div className="title bold">
-            <p>{name}</p>
+  class TitleRow extends React.Component {
+    
+    render (){
+      return (
+        <div className="row">
+            <div className="leftBorder"></div>
+            <div className="title bold">
+              <p>{this.props.name}</p>
+            </div>
+            <div className="value"></div>
+            <div className="button"></div>
           </div>
-          <div className="value"></div>
-          <div className="button"></div>
-        </div>
-    )
+      )
+    }
   }
 
   function buildRow (item) {
@@ -47,51 +50,59 @@ function App() {
     )
   }
 
-  const expencesItems = expences.map(item => buildRow(item));
-  const incomeItems = income.map(item => buildRow(item));
-
-  function buildSumRow(data){
-    
-    let valueSum = data.reduce((currentSum, array) => currentSum + array.value, 0);
-    
-    return (
-      <div className="row">
-          <div className="leftBorder"></div>
-          <div className="title bold">
-            <p>Sum:</p>
-          </div>
-          <div className="value bold">
-            <p >{valueSum} €</p>
-          </div>
-          <div className="button"></div>
-        </div>
-    )
+  class ListOfItems extends React.Component {
+    render () {
+      return (
+        this.props.data.map(item => buildRow(item))
+      )
+    }
   }
 
-  function buildAddRow (name) {
-    return (
-      <div className="row">
+  class SumRow extends React.Component {
+
+    render () {
+
+      const valueSum = this.props.data.reduce((currentSum, array) => currentSum + array.value, 0);
+
+      return (
+        <div className="row">
+            <div className="leftBorder"></div>
+            <div className="title bold">
+              <p>Sum:</p>
+            </div>
+            <div className="value bold">
+              <p >{valueSum} €</p>
+            </div>
+            <div className="button"></div>
+          </div>
+    )}
+  }
+
+  class AddRow extends React.Component {
+    render () {
+      return (
+        <div className="row">
           <div className="leftBorder"></div>
           <div className="title bold">
-            <p><i className="fas fa-plus-circle"></i> Add {name}</p>
+            <p><i className="fas fa-plus-circle"></i> Add {this.props.type}</p>
           </div>
           <div className="value"></div>
           <div className="button"></div>
         </div>
-    )
+    )}
   }
 
   return (
     <div className="App">
       <div className="monthTable">
-        {buildTitleRow("Expences")}
-        {expencesItems}
-        {buildAddRow("Expences")}
-        {buildSumRow(expences)}
-        {buildTitleRow("Income")}
-        {incomeItems}
-        {buildAddRow("Income")}
-        {buildSumRow(expences)}
+        <TitleRow name={"Expences"} />
+        <ListOfItems data={expences} />
+        <AddRow type={"Expences"} />
+        <SumRow data={expences} />
+        <TitleRow name={"Income"} />
+        <ListOfItems data={income} />
+        <AddRow type={"Income"} />
+        <SumRow data={income} />
       </div>
     </div>
   );
