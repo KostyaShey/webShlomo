@@ -1,0 +1,46 @@
+  .monthTable {
+    background-color: white;
+    border: 1px solid #dedede;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
+    width: 100%;
+  }
+  
+  .row {
+    display: flex;
+    border-bottom: 1px dotted #ccc;
+  }
+  
+  .leftBorder {
+    display: inline-block;
+    flex-basis: 100px;
+    border-right: thick double #ffaa9f;
+    padding-top: 1.5em;
+    padding-bottom: 1.5em;
+    min-width: 7%;
+  }
+  
+  .title {
+    display: inline-block;
+    flex-basis: 1000px;
+  
+  }
+  
+  .value {
+    display: inline-block;
+    flex-basis: 200px;
+    white-space: nowrap;
+    max-width: 15%;
+  }
+  
+  .button {
+    display: inline-block;
+    flex-basis: 200px;
+  }
+  
+  .row:hover {
+    background-color: #f0f0f0;
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -ms-transition: all 0.2s;
+    -o-transition: all 0.2s;
+  }
