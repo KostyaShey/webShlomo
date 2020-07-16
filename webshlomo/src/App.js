@@ -6,7 +6,10 @@ function App() {
 
   return (
     <div className="App">
-      <AllRowsOfType />
+      <div className="monthTable">
+        <AllRowsOfType type={"Expences"}/>
+        <AllRowsOfType type={"Income"}/>
+      </div>
     </div>
   );
 }
