@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 function buildRow (item) {
     return (
-      <div className="row">
+      <div className="row" key={item.id}>
         <div className="leftBorder"></div>
         <div className="title">
           <p>{item.name}</p>

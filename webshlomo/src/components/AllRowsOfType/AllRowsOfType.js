@@ -4,7 +4,7 @@ import ListOfItems from '../ListOfItems/ListOfItems'
 import SumRow from '../SumRow/SumRow'
 import TitleRow from '../TitleRow/TitleRow'
 import './AllRowsOfType.css'
-
+import InputRow from '../InputRow/InputRow'
 
 var data = {
     "Expences": [
@@ -22,7 +22,6 @@ var data = {
 }
 
 
-
 export default class AllRowsOfType extends Component {
 
     render() {
@@ -31,7 +30,8 @@ export default class AllRowsOfType extends Component {
                 <TitleRow name={this.props.type} />
                 <ListOfItems data={data[this.props.type]} />
                 <SumRow data={data[this.props.type]} />
-                <AddRow type={this.props.type} />
+                <AddRow type={this.props.type} onClick={InputRow.handleClick}/>
+                <InputRow />
             </div>
         )
     }
