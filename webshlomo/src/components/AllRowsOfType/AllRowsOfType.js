@@ -8,16 +8,16 @@ import './AllRowsOfType.css'
 
 var data = {
     "Expences": [
-        { name: 'Sex', value: 69 },
-        { name: 'Drugs', value: 666 },
-        { name: "Rock'n'Roll", value: 11 },
-        { name: 'Yo Moma', value: 69 }
+        { name: 'Sex', value: 69, id: 1 },
+        { name: 'Drugs', value: 666, id: 2 },
+        { name: "Rock'n'Roll", value: 11, id: 3 },
+        { name: 'Yo Moma', value: 420, id: 4 }
       ],
     "Income": [
-        { name: 'Hustle', value: 100 },
-        { name: 'Hustle', value: 100 },
-        { name: 'Hustle', value: 100 },
-        { name: 'Hustle', value: 100 },
+        { name: 'Hustle', value: 100, id: 1 },
+        { name: 'Hustle', value: 100, id: 2 },
+        { name: 'Hustle', value: 100, id: 3 },
+        { name: 'Hustle', value: 100, id: 4 },
     ]
 }
 
