@@ -1,15 +1,69 @@
-form {
-    
+.inputs {
+
 }
 
-input {
-    align-self: flex-start
-  }
-
 .inputTitle {
+    margin-top: 1em;
     display: inline-block;
     flex-basis: 1000px;
     align-items: center;
     height: 50px;
-    border: 1px solid red;
+}
+
+.inputValue {
+  margin-top: 1em;
+  display: inline-block;
+  flex-basis: 200px;
+  align-items: center;
+  height: 50px;
+}
+
+.inputButton {
+  margin-top: 1em;
+  display: inline-block;
+  flex-basis: 200px;
+  align-items: center;
+  height: 50px;
+}
+input{
+  box-sizing: border-box;
+  margin-left: 2%;
+  margin-right: 2%;
+  width: 96%;
+  border: none;
+  border-bottom: 1px solid;
+  border-color: lightgrey;
+  min-height: 85%;
+}
+
+input[type=text] {
+  padding-left: 1em;
+  font-size: 1.2em;
+}
+
+input[type=value] {
+
+  padding-left: 1%;
+  font-size: 1.2em;
+  color: beige;
+}
+
+input[type=submit] {
+  padding: 0px;
+  font-size: 1.2em;
+  border: none;
+  max-width: 30%;
+  background-color: white;
+}
+
+input[type=submit]:hover {
+  background-color: #f0f0f0;
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -ms-transition: all 0.2s;
+    -o-transition: all 0.2s;
+}
+
+.noHover:hover {
+  background-color: white;
 }
