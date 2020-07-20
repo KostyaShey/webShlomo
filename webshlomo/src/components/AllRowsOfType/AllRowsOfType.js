@@ -29,7 +29,21 @@ export default class AllRowsOfType extends Component {
     
         this.state = {
              showAddRow: true,
-             showInputRow: false
+             showInputRow: false,
+             data: {
+                "Expences": [
+                    { name: 'Sex', value: 69, id: 1 },
+                    { name: 'Drugs', value: 666, id: 2 },
+                    { name: "Rock'n'Roll", value: 11, id: 3 },
+                    { name: 'Yo Moma', value: 420, id: 4 }
+                  ],
+                "Income": [
+                    { name: 'Hustle', value: 100, id: 1 },
+                    { name: 'Hustle', value: 100, id: 2 },
+                    { name: 'Hustle', value: 100, id: 3 },
+                    { name: 'Hustle', value: 100, id: 4 },
+                ]
+            }
         }
         this.changeVisibility = this.changeVisibility.bind(this);
     }
@@ -53,7 +67,7 @@ export default class AllRowsOfType extends Component {
                 <ListOfItems data={data[this.props.type]} />
                 <SumRow data={data[this.props.type]} />
                 {this.state.showAddRow && < AddRow type={this.props.type} onClick={this.changeVisibility}/>}
-                {this.state.showInputRow && <InputRow onClick={this.changeVisibility} data={data[this.props.type]} />}
+                {this.state.showInputRow && <InputRow onClick={this.changeVisibility} data={this.state[this.props.type]} />}
             </div>
         )
     }

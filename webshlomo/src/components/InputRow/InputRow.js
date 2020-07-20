@@ -12,6 +12,7 @@ export default class InputRow extends Component {
         }
 
         this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange(event) {
@@ -21,11 +22,15 @@ export default class InputRow extends Component {
             [name]: event.target.value});
     }
     
+    handleSubmit(event) {
+        alert('Title: ' + this.state.inputTitle + ' Value: ' + this.state.inputValue);
+        event.preventDefault();
+      }
 
     render() {
 
             return (
-                <form>
+                <form onSubmit={this.handleSubmit}>
                     <div className="row noHover ">
                         <div className="leftBorder"></div>  
                         <div className="inputTitle">
@@ -41,14 +46,16 @@ export default class InputRow extends Component {
                                 onChange={this.handleChange}/>
                             </div>
                         <div className="inputButton">
-                            <input type="submit" 
+                            <input type="submit"
+                                name="submit" 
                                 style={{fontFamily: "FontAwesome"}} 
                                 value="&#xf00c;" 
-                                onClick={() => this.props.onClick('showAddRow')}/>
-                            <input type="submit" 
+                                />
+{/*                             <input type="submit"
+                                name="cancel"  
                                 style={{fontFamily: "FontAwesome"}} 
                                 value="&#xf05e;" 
-                                onClick={() => this.props.onClick('showAddRow')}/>
+                                /> */}
                         </div>
                     </div>
                 </form>
