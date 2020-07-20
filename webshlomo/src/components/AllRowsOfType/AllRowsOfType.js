@@ -24,14 +24,36 @@ var data = {
 
 export default class AllRowsOfType extends Component {
 
+    constructor(props) {
+        super(props)
+    
+        this.state = {
+             showAddRow: true,
+             showInputRow: false
+        }
+        this.changeVisibility = this.changeVisibility.bind(this);
+    }
+    
+    changeVisibility (componentName) {
+        console.log(componentName);
+        if (componentName === 'showInputRow') {
+            this.setState({showInputRow: !this.state.showInputRow})
+            this.setState({showAddRow: !this.state.showAddRow})
+        };
+        if (componentName === 'showAddRow') {
+            this.setState({showAddRow: !this.state.showAddRow})
+            this.setState({showInputRow: !this.state.showInputRow})
+        };
+    }
+
     render() {
         return (
             <div>
                 <TitleRow name={this.props.type} />
                 <ListOfItems data={data[this.props.type]} />
                 <SumRow data={data[this.props.type]} />
-                <AddRow type={this.props.type} onClick={InputRow.handleClick}/>
-                <InputRow />
+                {this.state.showAddRow && < AddRow type={this.props.type} onClick={this.changeVisibility}/>}
+                {this.state.showInputRow && <InputRow onClick={this.changeVisibility}/>}
             </div>
         )
     }
