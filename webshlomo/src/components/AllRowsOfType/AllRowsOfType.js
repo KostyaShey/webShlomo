@@ -53,7 +53,7 @@ export default class AllRowsOfType extends Component {
                 <ListOfItems data={data[this.props.type]} />
                 <SumRow data={data[this.props.type]} />
                 {this.state.showAddRow && < AddRow type={this.props.type} onClick={this.changeVisibility}/>}
-                {this.state.showInputRow && <InputRow onClick={this.changeVisibility}/>}
+                {this.state.showInputRow && <InputRow onClick={this.changeVisibility} data={data[this.props.type]} />}
             </div>
         )
     }
