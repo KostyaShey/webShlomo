@@ -10,14 +10,14 @@ export default class InputRow extends Component {
                     <div className="leftBorder"></div>
                     <form>
                         <div className="inputTitle">
-                        <label>
-                            <input type="text" name="name" className="title"/>
-                        </label>
+                            <input type="text" name="inputTitle" className="title"/>
                         </div>
-                        <label className="value">
+                        <div>
                             <input type="text" name="value" />
-                        </label>
-                        <input type="submit" value="Submit" className="button" onClick={() => this.props.onClick('showAddRow')}/>
+                        </div>
+                        <div>
+                            <input type="submit" value="Submit" className="button" onClick={() => this.props.onClick('showAddRow')}/>
+                        </div>
                     </form>
                 </div>
             )
