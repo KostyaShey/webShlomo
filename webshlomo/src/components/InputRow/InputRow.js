@@ -12,6 +12,7 @@ export default class InputRow extends Component {
         }
 
         this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange(event) {
@@ -25,10 +26,15 @@ export default class InputRow extends Component {
         return {name: this.state.inputTitle, value: this.state.inputValue, id: this.props.data.length}
     }
 
+    handleSubmit(e) {
+        this.props.onSubmit(this.getDataFromInputs, this.props.type)
+    }
+
+
     render() {
 
             return (
-                <form onSubmit={() => this.props.onSubmit(this.getDataFromInputs, this.props.type)}>
+                <form onSubmit={this.handleSubmit}>
                     <div className="row noHover ">
                         <div className="leftBorder"></div>  
                         <div className="inputTitle">
