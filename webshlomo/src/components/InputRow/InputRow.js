@@ -27,7 +27,7 @@ export default class InputRow extends Component {
     }
 
     handleSubmit(e) {
-        this.props.onSubmit(this.getDataFromInputs, this.props.type)
+        this.props.onSubmit(this.getDataFromInputs, this.props.type);
     }
 
 
@@ -55,11 +55,7 @@ export default class InputRow extends Component {
                                 style={{fontFamily: "FontAwesome"}} 
                                 value="&#xf00c;" 
                                 />
-{/*                             <input type="submit"
-                                name="cancel"  
-                                style={{fontFamily: "FontAwesome"}} 
-                                value="&#xf05e;" 
-                                /> */}
+                                <button type="button" onClick={this.props.changeVisibility}>&#xf05e;</button>
                         </div>
                     </div>
                 </form>

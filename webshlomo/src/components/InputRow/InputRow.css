@@ -2,6 +2,10 @@
 
 }
 
+button {
+  font-family: "FontAwesome";
+}
+
 .inputTitle {
     margin-top: 1em;
     display: inline-block;
