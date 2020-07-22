@@ -9,10 +9,10 @@ export default class ItemRow extends Component {
                     <p>{this.props.item.name}</p>
                 </div>
                 <div className="value">
-                    <p>{this.props.item.value} €</p>
+                    <p className="numbersAlign">{this.props.item.value} €</p>
                 </div>
                 <div className="button">
-                    <p><i className="far fa-trash-alt"></i></p>
+                    <button type="button">&#xf05e;</button>
                 </div>
             </div>
         )

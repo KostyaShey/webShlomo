@@ -35,7 +35,7 @@ export default class InputRow extends Component {
 
             return (
                 <form onSubmit={this.handleSubmit}>
-                    <div className="row noHover ">
+                    <div className="row noHover">
                         <div className="leftBorder"></div>  
                         <div className="inputTitle">
                             <input type="text"
@@ -44,17 +44,13 @@ export default class InputRow extends Component {
                                 onChange={this.handleChange}/>
                         </div>
                         <div className="inputValue">
-                            <input type="text"
+                            <input type="value"
                                 name="inputValue" 
                                 value={this.state.inputValue} 
                                 onChange={this.handleChange}/>
                             </div>
-                        <div className="inputButton">
-                            <input type="submit"
-                                name="submit" 
-                                style={{fontFamily: "FontAwesome"}} 
-                                value="&#xf00c;" 
-                                />
+                        <div className="inputButtons">
+                                <button>&#xf00c;</button>
                                 <button type="button" onClick={this.props.changeVisibility}>&#xf05e;</button>
                         </div>
                     </div>

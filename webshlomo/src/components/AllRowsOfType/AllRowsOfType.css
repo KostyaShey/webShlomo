@@ -6,35 +6,30 @@
   }
   
   .row {
-    display: flex;
+    display: grid;
+    grid-template-columns: minmax(2%, 5%) minmax(40%, 60%) minmax(10%, 15%) minmax(10%, auto);
     border-bottom: 1px dotted #ccc;
   }
   
   .leftBorder {
-    display: inline-block;
-    flex-basis: 100px;
+    grid-column: 1 / 1;
     border-right: thick double #ffaa9f;
     padding-top: 1.5em;
     padding-bottom: 1.5em;
-    min-width: 7%;
   }
   
   .title {
-    display: inline-block;
-    flex-basis: 1000px;
+    grid-column: 2 / 2;
   
   }
   
   .value {
-    display: inline-block;
-    flex-basis: 200px;
+    grid-column: 3 / 3;
     white-space: nowrap;
-    max-width: 15%;
   }
   
   .button {
-    display: inline-block;
-    flex-basis: 200px;
+    grid-column: 4 / 4;
   }
   
   .row:hover {

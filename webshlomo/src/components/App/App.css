@@ -1,5 +1,4 @@
 .App {
-  text-align: center;
   margin: 5%;
 }
 
@@ -14,6 +13,32 @@ p {
   text-align: left;
   padding: 0em 0em 0em 1em;
   font-size: 1.2em;
+}
+
+button {
+  background-color: white;
+  border: none;
+  border-radius: 15%;
+  padding: 0.5em 0.5em 0.5em 0.5em;
+  font-size: 1.2em;
+  margin: 0em 3%;
+  box-shadow: 5px 10px 18px #888888;
+  position: relative;
+  top: 20%;
+  left: 30%;
+  font-family: "FontAwesome";
+}
+
+button:hover {
+  background-color: #f0f0f0;
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -ms-transition: all 0.2s;
+    -o-transition: all 0.2s;
+}
+
+.numbersAlign {
+  text-align: right;
 }
 
 .bold {
