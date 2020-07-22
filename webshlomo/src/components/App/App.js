@@ -8,8 +8,6 @@ export default class App extends Component {
         super(props)
     
         this.state = {
-             showAddRow: true,
-             showInputRow: false,
              Expences: [
                 { name: 'Sex', value: 69, id: 0 },
                 { name: 'Drugs', value: 666, id: 1 },
@@ -23,19 +21,7 @@ export default class App extends Component {
                 { name: 'Hustle', value: 100, id: 3 },
             ]
         }
-        this.changeVisibility = this.changeVisibility.bind(this);
         this.addRowToList = this.addRowToList.bind(this);
-    }
-
-    changeVisibility (componentName) {
-        if (componentName === 'showInputRow') {
-            this.setState({showInputRow: !this.state.showInputRow})
-            this.setState({showAddRow: !this.state.showAddRow})
-        };
-        if (componentName === 'showAddRow') {
-            this.setState({showAddRow: !this.state.showAddRow})
-            this.setState({showInputRow: !this.state.showInputRow})
-        };
     }
 
     addRowToList (newRowData, typeOfData) {
@@ -51,16 +37,10 @@ export default class App extends Component {
                     <AllRowsOfType 
                         type={"Expences"} 
                         data={this.state["Expences"]}
-                        addRowVisibility={this.state.showAddRow}
-                        inputRowVisibility={this.state.showInputRow}
-                        changeVisibility={this.changeVisibility}
                         addRowToList={this.addRowToList} />
                     <AllRowsOfType 
                         type={"Income"}
                         data={this.state["Income"]}
-                        addRowVisibility={this.state.showAddRow}
-                        inputRowVisibility={this.state.showInputRow}
-                        changeVisibility={this.changeVisibility}
                         addRowToList={this.addRowToList} />
                 </div>
             </div>
