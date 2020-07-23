@@ -2,8 +2,14 @@ import React, { Component } from 'react'
 
 export default class ItemRow extends Component {
     
+    constructor(props) {
+        super(props)
+        this.handleClick = this.handleClick.bind(this)
+    }
+    
+
     handleClick () {
-        let id = this.props.item;
+        let id = this.props.item.id;
         let type = this.props.typeOfData;        
         this.props.removeRowFromList(id, type);
     } 

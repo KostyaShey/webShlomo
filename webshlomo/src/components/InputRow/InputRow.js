@@ -26,8 +26,8 @@ export default class InputRow extends Component {
         return {name: this.state.inputTitle, value: parseInt(this.state.inputValue), id: this.props.data.length}
     }
 
-    handleSubmit(e) {
-        e.preventDefault(); // prevendDefault disables the devault requests on submit. 
+    handleSubmit(event) {
+        event.preventDefault(); // prevendDefault disables the devault requests on submit. 
         this.props.onSubmit(this.getDataFromInputs, this.props.type);
         this.setState({
             inputTitle:'',
