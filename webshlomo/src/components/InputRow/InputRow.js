@@ -7,8 +7,8 @@ export default class InputRow extends Component {
         super(props)
     
         this.state = {
-             inputTitle: 'Input Title',
-             inputValue: 'Input Value'
+             inputTitle: '',
+             inputValue: ''
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -23,12 +23,16 @@ export default class InputRow extends Component {
     }
 
     get getDataFromInputs () {
-        return {name: this.state.inputTitle, value: this.state.inputValue, id: this.props.data.length}
+        return {name: this.state.inputTitle, value: parseInt(this.state.inputValue), id: this.props.data.length}
     }
 
     handleSubmit(e) {
-        e.preventDefault();
+        e.preventDefault(); // prevendDefault disables the devault requests on submit. 
         this.props.onSubmit(this.getDataFromInputs, this.props.type);
+        this.setState({
+            inputTitle:'',
+            inputValue:''
+        })
     }
 
 
@@ -40,13 +44,15 @@ export default class InputRow extends Component {
                         <div className="leftBorder"></div>  
                         <div className="inputTitle">
                             <input type="text"
-                                name="inputTitle" 
+                                name="inputTitle"
+                                placeholder="Input Title" 
                                 value={this.state.inputTitle} 
                                 onChange={this.handleChange}/>
                         </div>
                         <div className="inputValue">
-                            <input type="value"
+                            <input type="number"
                                 name="inputValue" 
+                                placeholder="Input Value"
                                 value={this.state.inputValue} 
                                 onChange={this.handleChange}/>
                             </div>

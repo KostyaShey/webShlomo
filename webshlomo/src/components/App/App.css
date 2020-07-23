@@ -2,12 +2,6 @@
   margin: 5%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 p {
   color: #000;
   text-align: left;

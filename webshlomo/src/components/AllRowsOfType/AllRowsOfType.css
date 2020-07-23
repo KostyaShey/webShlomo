@@ -7,7 +7,7 @@
   
   .row {
     display: grid;
-    grid-template-columns: minmax(2%, 5%) minmax(40%, 60%) minmax(10%, 15%) minmax(10%, auto);
+    grid-template-columns: minmax(2%, 5%) minmax(20%, 60%) minmax(10%, 15%) minmax(10%, auto);
     border-bottom: 1px dotted #ccc;
   }
   

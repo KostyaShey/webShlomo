@@ -30,7 +30,11 @@ export default class AllRowsOfType extends Component {
         return (
             <div>
                 <TitleRow name={this.props.type} />
-                {this.props.data.map(item => <ItemRow item={item} />)}
+                {this.props.data.map(item => <ItemRow 
+                                                item={item}
+                                                key={item.id.toString()} 
+                                                removeRowFromList={this.props.removeRowFromList}
+                                                typeOfData={this.props.type}/>)}
                 <SumRow data={this.props.data} />
                 {this.state.showAddRow && < AddRow 
                                                 type={this.props.type} 

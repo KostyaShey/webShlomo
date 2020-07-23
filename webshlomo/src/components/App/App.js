@@ -22,11 +22,20 @@ export default class App extends Component {
             ]
         }
         this.addRowToList = this.addRowToList.bind(this);
+        this.removeRowFromList = this.removeRowFromList.bind(this);
     }
 
     addRowToList (newRowData, typeOfData) {
         var newData = this.state[typeOfData];
         newData.push(newRowData);
+        this.setState({[typeOfData]: newData});
+    }
+
+    removeRowFromList (rowID, typeOfData) {
+        var newData = this.state[typeOfData];
+        newData = newData.filter(function(obj) {
+            return obj.id !== rowID;
+        });
         this.setState({[typeOfData]: newData});
     }
     
@@ -37,11 +46,13 @@ export default class App extends Component {
                     <AllRowsOfType 
                         type={"Expences"} 
                         data={this.state["Expences"]}
-                        addRowToList={this.addRowToList} />
+                        addRowToList={this.addRowToList} 
+                        removeRowFromList={this.removeRowFromList}/>
                     <AllRowsOfType 
                         type={"Income"}
                         data={this.state["Income"]}
-                        addRowToList={this.addRowToList} />
+                        addRowToList={this.addRowToList}
+                        removeRowFromList={this.removeRowFromList} />
                 </div>
             </div>
         )
