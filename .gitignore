@@ -1,0 +1,23 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/webshlomo/node_modules
+/webshlomo/.pnp
+/webshlomo/.pnp.js
+
+# testing
+/webshlomo/coverage
+
+# production
+/webshlomo/build
+
+# misc
+/webshlomo/.DS_Store
+/webshlomo/.env.local
+/webshlomo/.env.development.local
+/webshlomo/.env.test.local
+/webshlomo/.env.production.local
+
+/webshlomo/npm-debug.log*
+/webshlomo/yarn-debug.log*
+/webshlomo/yarn-error.log*
