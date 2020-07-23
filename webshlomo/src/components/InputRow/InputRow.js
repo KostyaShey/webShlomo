@@ -46,14 +46,12 @@ export default class InputRow extends Component {
                             <input type="text"
                                 name="inputTitle"
                                 placeholder="Input Title" 
-                                value={this.state.inputTitle} 
                                 onChange={this.handleChange}/>
                         </div>
                         <div className="inputValue">
                             <input type="number"
                                 name="inputValue" 
                                 placeholder="Input Value"
-                                value={this.state.inputValue} 
                                 onChange={this.handleChange}/>
                             </div>
                         <div className="inputButtons">
