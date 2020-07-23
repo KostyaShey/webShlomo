@@ -35,7 +35,6 @@ export default class InputRow extends Component {
         })
     }
 
-
     render() {
 
             return (
