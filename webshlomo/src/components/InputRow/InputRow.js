@@ -27,6 +27,7 @@ export default class InputRow extends Component {
     }
 
     handleSubmit(e) {
+        e.preventDefault();
         this.props.onSubmit(this.getDataFromInputs, this.props.type);
     }
 
