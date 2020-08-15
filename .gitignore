@@ -21,3 +21,7 @@
 /webshlomo/npm-debug.log*
 /webshlomo/yarn-debug.log*
 /webshlomo/yarn-error.log*
+
+#python
+venv
+__pycache__

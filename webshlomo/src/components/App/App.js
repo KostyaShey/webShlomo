@@ -23,6 +23,8 @@ export default class App extends Component {
         }
         this.addRowToList = this.addRowToList.bind(this);
         this.removeRowFromList = this.removeRowFromList.bind(this);
+        this.testButton = this.testButton.bind(this);
+        this.sayHello = this.sayHello.bind(this);
     }
 
     addRowToList (newRowData, typeOfData) {
@@ -39,6 +41,23 @@ export default class App extends Component {
         this.setState({[typeOfData]: newData});
     }
     
+    testButton () {
+        fetch('/time').then(response => response.json()).then(response => alert('The time is ' + response.time));
+    }
+
+    sayHello () {
+        fetch('/sayHello')
+        .then(response => response.body)
+        .then(body => {
+            const reader = body.getReader();
+            reader.read()
+            .then(({ done, value }) => {
+                alert(value)
+            })
+        })
+
+    }
+
     render() {
         return (
             <div className="App">
@@ -54,6 +73,12 @@ export default class App extends Component {
                         addRowToList={this.addRowToList}
                         removeRowFromList={this.removeRowFromList} />
                 </div>
+                <button onClick={this.testButton}>
+                    What time is it!
+                </button>
+                <button onClick={this.sayHello}>
+                    Say hello!
+                </button>
             </div>
         )
     }
