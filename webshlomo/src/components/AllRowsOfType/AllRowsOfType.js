@@ -32,7 +32,7 @@ export default class AllRowsOfType extends Component {
                 <TitleRow name={this.props.type} />
                 {this.props.data.map(item => <ItemRow 
                                                 item={item}
-                                                key={item.id.toString()} 
+                                                 
                                                 removeRowFromList={this.props.removeRowFromList}
                                                 typeOfData={this.props.type}/>)}
                 <SumRow data={this.props.data} />

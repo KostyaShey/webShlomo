@@ -30,8 +30,8 @@ export default class InputRow extends Component {
         event.preventDefault(); // prevendDefault disables the devault requests on submit. 
         this.props.onSubmit(this.getDataFromInputs, this.props.type);
         this.setState({
-            inputTitle:'',
-            inputValue:''
+            inputTitle: '',
+            inputValue: ''
         })
     }
 

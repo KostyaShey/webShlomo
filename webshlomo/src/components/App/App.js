@@ -24,7 +24,8 @@ export default class App extends Component {
         this.addRowToList = this.addRowToList.bind(this);
         this.removeRowFromList = this.removeRowFromList.bind(this);
         this.testButton = this.testButton.bind(this);
-        this.sayHello = this.sayHello.bind(this);
+        this.writeToDB = this.writeToDB.bind(this);
+        this.mapDataFromDB = this.mapDataFromDB.bind(this);
     }
 
     addRowToList (newRowData, typeOfData) {
@@ -41,22 +42,42 @@ export default class App extends Component {
         this.setState({[typeOfData]: newData});
     }
     
-    testButton () {
-        fetch('/time').then(response => response.json()).then(response => alert('The time is ' + response.time));
-    }
-
-    sayHello () {
-        fetch('/sayHello')
-        .then(response => response.body)
-        .then(body => {
-            const reader = body.getReader();
-            reader.read()
-            .then(({ done, value }) => {
-                alert(value)
-            })
+    mapDataFromDB (data) {
+        let expences = [];
+        let income = [];
+        data.forEach(element => {
+            if (element.type === 'expence') {
+                expences.push(element)
+                console.log("added " + element + " to expences")
+            }
+            if (element.type === 'income') {
+                income.push(element)
+                console.log("added " + element + " to income")
+            }
         })
 
+        return {Expences: expences, Income : income}
     }
+
+    testButton () {
+        fetch('/fetch').then(response => response.json())
+        .then(response => this.mapDataFromDB(response))
+        .then(response => this.setState(response));
+    }
+
+    writeToDB () {
+        fetch('/add', {
+            method: 'POST',
+            headers: {
+              'Content-type': 'application/json',
+              },
+              body: JSON.stringify({ 
+                "name": "hello form react",
+                "value": 11
+                })
+          })
+        }
+          
 
     render() {
         return (
@@ -73,11 +94,12 @@ export default class App extends Component {
                         addRowToList={this.addRowToList}
                         removeRowFromList={this.removeRowFromList} />
                 </div>
+                <br />
                 <button onClick={this.testButton}>
-                    What time is it!
+                    fetch data from mongo
                 </button>
-                <button onClick={this.sayHello}>
-                    Say hello!
+                <button onClick={this.writeToDB}>
+                    add data to mongo
                 </button>
             </div>
         )

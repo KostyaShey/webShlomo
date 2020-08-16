@@ -27,13 +27,17 @@ def add_data():
     _json = request.json
     _name = _json['name']
     _value = _json['value']
-    id = mongo.db.AUG2020.insert({'name': _name, 'value': _value})
 
-    response = jsonify('Operation success')
-    response.status_code = 200
+    if _name and _value and request.method == 'POST':
+        id = mongo.db.AUG2020.insert({'name': _name, 'value': _value})
+        response = jsonify('Operation success')
+        response.status_code = 200
 
+@app.route('/fetch')
+def fetch():
+    data = mongo.db.AUG2020.find()
+    response = dumps(data)
     return response
-
 
 if __name__ == '__main__':
     app.run(debug=True)
