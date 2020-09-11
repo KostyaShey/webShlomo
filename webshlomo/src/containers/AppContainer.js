@@ -5,7 +5,7 @@ export default class AppContainer extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = { loading: true };
 
         this.readFromDB = this.readFromDB.bind(this);
         this.writeToDB = this.writeToDB.bind(this);
@@ -15,7 +15,7 @@ export default class AppContainer extends React.Component {
     readFromDB() {
         fetch('/fetch').then(response => response.json())
             .then(response => this.mapDataFromDB(response))
-            .then(response => this.setState(response));
+            .then(response => this.setState(response))
     }
 
     mapDataFromDB(data) {
@@ -47,9 +47,15 @@ export default class AppContainer extends React.Component {
         }).then(this.readFromDB)
     }
 
-    render() {
+    async componentDidMount() {
+        const responce = await fetch('/fetch');
+        const json = await responce.json();
+        const mappedData = this.mapDataFromDB(json)
+        mappedData.loading = false;
+        this.setState(mappedData)
+    }
 
-        this.readFromDB();
+    render() {
 
         return <App data={this.state}
             writeToDB={this.writeToDB} />;

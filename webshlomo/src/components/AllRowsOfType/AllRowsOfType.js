@@ -26,23 +26,30 @@ export default class AllRowsOfType extends Component {
     }
 
     render() {
-        return (
-            <div>
-                <TitleRow name={this.props.type} />
-                {this.props.data.map(item => <ItemRow
-                    item={item}
-                    removeRowFromList={this.props.removeRowFromList}
-                    typeOfData={this.props.type} />)}
-                <SumRow data={this.props.data} />
-                {this.state.showAddRow && < AddRow
-                    type={this.props.type}
-                    changeVisibility={this.changeVisibility} />}
-                {this.state.showInputRow && <InputRow
-                    changeVisibility={this.changeVisibility}
-                    onSubmit={this.props.addRowToList}
-                    type={this.props.type}
-                    data={this.props.data} />}
-            </div>
-        )
+        if (this.props.loading === true) {
+            return (
+                <div>Loading</div>
+            )
+        } else {
+            return (
+                <div>
+                    <TitleRow name={this.props.type} />
+                    {this.props.data.map(item => <ItemRow
+                        item={item}
+                        removeRowFromList={this.props.removeRowFromList}
+                        typeOfData={this.props.type}
+                        key={item._id['$oid']} />)}
+                    <SumRow data={this.props.data} />
+                    {this.state.showAddRow && < AddRow
+                        type={this.props.type}
+                        changeVisibility={this.changeVisibility} />}
+                    {this.state.showInputRow && <InputRow
+                        changeVisibility={this.changeVisibility}
+                        onSubmit={this.props.addRowToList}
+                        type={this.props.type}
+                        data={this.props.data} />}
+                </div>
+            )
+        }
     }
 }
