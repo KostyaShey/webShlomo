@@ -1,12 +1,11 @@
 import React from 'react';
 import App from '../components/App/App'
 
-class AppContainer extends React.Component {
+export default class AppContainer extends React.Component {
 
     constructor(props) {
         super(props);
-
-        this.state = { data: {} };
+        this.state = { loading: true };
 
         this.readFromDB = this.readFromDB.bind(this);
         this.writeToDB = this.writeToDB.bind(this);
@@ -25,11 +24,9 @@ class AppContainer extends React.Component {
         data.forEach(element => {
             if (element.type === 'expence') {
                 expences.push(element)
-                console.log("added " + element + " to expences")
             }
             if (element.type === 'income') {
                 income.push(element)
-                console.log("added " + element + " to income")
             }
         })
 
@@ -57,6 +54,7 @@ class AppContainer extends React.Component {
     }
 
     render() {
+
         return <App data={this.state}
             writeToDB={this.writeToDB} />;
     }
