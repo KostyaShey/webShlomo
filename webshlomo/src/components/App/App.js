@@ -81,6 +81,9 @@ export default class App extends Component {
 
 
     render() {
+
+        this.readFromDB();
+
         return (
             <div className="App">
                 <div className="monthTable">
