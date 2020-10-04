@@ -15,12 +15,15 @@ export default class App extends Component {
                         loading={this.props.data.loading}
                         data={this.props.data.expence}
                         writeToDB={this.props.writeToDB}
-                        readFromDB={this.props.readFromDB} />
+                        readFromDB={this.props.readFromDB}
+                        deleteFromDB={this.props.deleteFromDB} />
                     <AllRowsOfType
                         type={"income"}
                         loading={this.props.data.loading}
                         data={this.props.data.income}
-                        readFromDB={this.props.readFromDB} />
+                        writeToDB={this.props.writeToDB}
+                        readFromDB={this.props.readFromDB}
+                        deleteFromDB={this.props.deleteFromDB} />
                 </div>
             </div>
         )

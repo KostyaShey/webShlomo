@@ -38,6 +38,8 @@ export default class AllRowsOfType extends Component {
                         item={item}
                         removeRowFromList={this.props.removeRowFromList}
                         typeOfData={this.props.type}
+                        deleteFromDB={this.props.deleteFromDB}
+                        readFromDB={this.props.readFromDB}
                         key={item._id['$oid']} />)}
                     <SumRow data={this.props.data} />
                     {this.state.showAddRow && < AddRow

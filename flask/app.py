@@ -29,12 +29,11 @@ def add_data():
     _value = _json['value']
     _type = _json['type']
 
-    print(_type)
-
     if _name and _value and _type and request.method == 'POST':
         id = mongo.db.AUG2020.insert(
             {'name': _name, 'value': _value, 'type': _type})
 
+    return dumps({'success':True}), 200, {'ContentType':'application/json'} 
 
 @app.route('/fetch')
 def fetch():
@@ -42,6 +41,14 @@ def fetch():
     response = dumps(data)
     return response
 
+@app.route('/delete', methods=['POST'])
+def delete():
+    _json = request.json
+    _id = _json['id']
+    print('id' + _id)
+    id = mongo.db.AUG2020.delete_one({'_id': ObjectId(_id)})
+
+    return dumps({'success':True}), 200, {'ContentType':'application/json'} 
 
 if __name__ == '__main__':
     app.run(debug=True)
