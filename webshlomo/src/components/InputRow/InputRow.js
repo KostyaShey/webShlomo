@@ -15,10 +15,13 @@ export default function InputRow(props) {
         }
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault(); // prevendDefault disables the devault requests on submit.
-        console.log('Submitted')
-        props.writeToDB({name: name, value: parseInt(value)}, props.type)
+        console.log('Submitted');
+        await props.writeToDB({name: name, value: parseInt(value)}, props.type);
+        setName('');
+        setValue('');
+        props.readFromDB();
     }
     
     return (
@@ -28,12 +31,14 @@ export default function InputRow(props) {
                     <div className="inputTitle">
                         <input type="text"
                             name="inputTitle"
+                            value={name}
                             placeholder="Input Title"
                             onChange={handleChange} />
                     </div>
                     <div className="inputValue">
                         <input type="number"
                             name="inputValue"
+                            value={value}
                             placeholder="Input Value"
                             onChange={handleChange} />
                     </div>

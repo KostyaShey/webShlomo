@@ -46,6 +46,7 @@ export default class AllRowsOfType extends Component {
                     {this.state.showInputRow && <InputRow
                         changeVisibility={this.changeVisibility}
                         writeToDB={this.props.writeToDB}
+                        readFromDB={this.props.readFromDB}
                         type={this.props.type}/>}
                 </div>
             )

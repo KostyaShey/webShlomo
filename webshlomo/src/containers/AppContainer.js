@@ -44,7 +44,7 @@ export default class AppContainer extends React.Component {
                 "value": data.value,
                 "type": type
             })
-        }).then(this.readFromDB)
+        })
     }
 
     async componentDidMount() {
@@ -58,6 +58,7 @@ export default class AppContainer extends React.Component {
     render() {
 
         return <App data={this.state}
-            writeToDB={this.writeToDB} />;
+            writeToDB={this.writeToDB}
+            readFromDB={this.readFromDB} />;
     }
 }
