@@ -10,6 +10,7 @@ export default class AppContainer extends React.Component {
         this.readFromDB = this.readFromDB.bind(this);
         this.writeToDB = this.writeToDB.bind(this);
         this.mapDataFromDB = this.mapDataFromDB.bind(this);
+        this.deleteFromDB = this.deleteFromDB.bind(this);
     }
 
     readFromDB() {
@@ -47,6 +48,18 @@ export default class AppContainer extends React.Component {
         })
     }
 
+    deleteFromDB (key) {
+        fetch('/delete', {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify({
+                "id": key
+            })
+        })
+    }
+
     async componentDidMount() {
         const responce = await fetch('/fetch');
         const json = await responce.json();
@@ -59,6 +72,7 @@ export default class AppContainer extends React.Component {
 
         return <App data={this.state}
             writeToDB={this.writeToDB}
-            readFromDB={this.readFromDB} />;
+            readFromDB={this.readFromDB}
+            deleteFromDB={this.deleteFromDB} />;
     }
 }
