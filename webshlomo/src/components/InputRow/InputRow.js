@@ -1,67 +1,52 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import './InputRow.css'
 
-export default class InputRow extends Component {
-
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            inputTitle: '',
-            inputValue: ''
+export default function InputRow(props) {
+    const [name, setName] = useState('');
+    const [value, setValue] = useState('');
+    
+    const handleChange = (event) => {
+        console.log(event.target)
+        if (event.target.name === 'inputTitle') {
+            setName(event.target.value)
         }
-
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        if (event.target.name === 'inputValue') {
+            setValue(event.target.value)
+        }
     }
 
-    handleChange(event) {
-        const target = event.target;
-        const name = target.name;
-        this.setState({
-            [name]: event.target.value
-        });
-    }
-
-    get getDataFromInputs() {
-        return { name: this.state.inputTitle, value: parseInt(this.state.inputValue) }
-    }
-
-    handleSubmit(event) {
+    const handleSubmit = async (event) => {
         event.preventDefault(); // prevendDefault disables the devault requests on submit.
-        var data = this.getDataFromInputs;
-        this.setState({
-            inputTitle: '',
-            inputValue: ''
-        });
-        this.props.onSubmit(data, this.props.type)
-
+        console.log('Submitted');
+        await props.writeToDB({name: name, value: parseInt(value)}, props.type);
+        setName('');
+        setValue('');
+        props.readFromDB();
     }
-
-    render() {
-
-        return (
-            <form onSubmit={this.handleSubmit}>
+    
+    return (
+        <form onSubmit={handleSubmit}>
                 <div className="row noHover">
                     <div className="leftBorder"></div>
                     <div className="inputTitle">
                         <input type="text"
                             name="inputTitle"
+                            value={name}
                             placeholder="Input Title"
-                            onChange={this.handleChange} />
+                            onChange={handleChange} />
                     </div>
                     <div className="inputValue">
                         <input type="number"
                             name="inputValue"
+                            value={value}
                             placeholder="Input Value"
-                            onChange={this.handleChange} />
+                            onChange={handleChange} />
                     </div>
                     <div className="inputButtons">
-                        <button>&#xf00c;</button>
-                        <button type="button" onClick={this.props.changeVisibility}>&#xf05e;</button>
+                        <button type="submit">&#xf00c;</button>
+                        <button type="button" onClick={props.changeVisibility}>&#xf05e;</button>
                     </div>
                 </div>
-            </form>
-        )
-    }
+        </form>
+    )
 }

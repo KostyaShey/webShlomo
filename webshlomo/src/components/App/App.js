@@ -14,12 +14,13 @@ export default class App extends Component {
                         type={"expence"}
                         loading={this.props.data.loading}
                         data={this.props.data.expence}
-                        addRowToList={this.props.writeToDB} />
+                        writeToDB={this.props.writeToDB}
+                        readFromDB={this.props.readFromDB} />
                     <AllRowsOfType
                         type={"income"}
                         loading={this.props.data.loading}
                         data={this.props.data.income}
-                        addRowToList={this.props.writeToDB} />
+                        readFromDB={this.props.readFromDB} />
                 </div>
             </div>
         )
