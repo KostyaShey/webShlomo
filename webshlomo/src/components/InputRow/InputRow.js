@@ -41,7 +41,7 @@ export default function InputRow(props) {
                             placeholder="Input Value"
                             onChange={handleChange} />
                     </div>
-                    <div className="inputButtons">
+                    <div className="inputButtons inputButtons">
                         <button type="submit">&#xf00c;</button>
                         <button type="button" onClick={props.changeVisibility}>&#xf05e;</button>
                     </div>

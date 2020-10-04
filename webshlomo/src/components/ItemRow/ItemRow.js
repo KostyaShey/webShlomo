@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import './ItemRow.css';
 
 export default function ItemRow(props) {
     
@@ -17,8 +18,8 @@ export default function ItemRow(props) {
             <div className="value">
                 <p className="numbersAlign">{props.item.value} €</p>
             </div>
-            <div className="button">
-                <button type="button" onClick={handleClick}>&#xf05e;</button>
+            <div className="button trash">
+                <button type="button" onClick={handleClick}>&#xf2ed;</button>
             </div>
         </div>
     )
