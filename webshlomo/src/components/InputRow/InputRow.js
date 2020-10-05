@@ -6,7 +6,6 @@ export default function InputRow(props) {
     const [value, setValue] = useState('');
     
     const handleChange = (event) => {
-        console.log(event.target)
         if (event.target.name === 'inputTitle') {
             setName(event.target.value)
         }
@@ -17,10 +16,10 @@ export default function InputRow(props) {
 
     const handleSubmit = async (event) => {
         event.preventDefault(); // prevendDefault disables the devault requests on submit.
-        await props.writeToDB({name: name, value: parseInt(value)}, props.type);
+        await props.writeToDB({name: name, value: parseInt(value)}, props.type, props.date.currentMonth, props.date.currentYear);
         setName('');
         setValue('');
-        props.readFromDB();
+        props.readFromDB(props.type, props.date.currentMonth, props.date.currentYear);
     }
     
     return (

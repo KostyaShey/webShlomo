@@ -4,11 +4,9 @@ import AllRowsOfType from '../AllRowsOfType/AllRowsOfType'
 
 export default class App extends Component {
 
-    state={
-        curTime : new Intl.DateTimeFormat('en-US', { month: 'long'}).format(new Date())
-    }
-
     render() {
+
+        const month = ["January","February","March","April","May","June","July","August","September","October","November","December"]
 
         return (
 
@@ -18,7 +16,7 @@ export default class App extends Component {
                         <button type="button" >&#xf04a;</button>
                     </div>
                     <div className="currentMonth">
-                        {this.state.curTime}
+                        {month[this.props.data.date.currentMonth]}, {this.props.data.date.currentYear}
                     </div>
                     <div className="nextMonth">
                         <button type="button" >&#xf04e;</button>
@@ -26,19 +24,22 @@ export default class App extends Component {
                 </div>
                 <div className="monthTable">
                     <AllRowsOfType
-                        type={"expence"}
+                        type={"expences"}
                         loading={this.props.data.loading}
-                        data={this.props.data.expence}
+                        data={this.props.data.expences}
                         writeToDB={this.props.writeToDB}
                         readFromDB={this.props.readFromDB}
-                        deleteFromDB={this.props.deleteFromDB} />
+                        deleteFromDB={this.props.deleteFromDB}
+                        date={this.props.data.date}
+                         />
                     <AllRowsOfType
                         type={"income"}
                         loading={this.props.data.loading}
                         data={this.props.data.income}
                         writeToDB={this.props.writeToDB}
                         readFromDB={this.props.readFromDB}
-                        deleteFromDB={this.props.deleteFromDB} />
+                        deleteFromDB={this.props.deleteFromDB}
+                        date={this.props.data.date} />
                 </div>
             </div>
         )

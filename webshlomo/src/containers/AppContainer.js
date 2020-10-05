@@ -5,37 +5,33 @@ export default class AppContainer extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { loading: true };
+        this.state = {  loading: true,
+                        date: { currentMonth: new Date().getMonth(),
+                                currentYear: new Date().getFullYear()}
+                    };
 
         this.readFromDB = this.readFromDB.bind(this);
         this.writeToDB = this.writeToDB.bind(this);
-        this.mapDataFromDB = this.mapDataFromDB.bind(this);
         this.deleteFromDB = this.deleteFromDB.bind(this);
     }
 
-    readFromDB() {
-        fetch('/fetch').then(response => response.json())
-            .then(response => this.mapDataFromDB(response))
-            .then(response => this.setState(response))
-    }
-
-    mapDataFromDB(data) {
-        let expences = [];
-        let income = [];
-        data.forEach(element => {
-            if (element.type === 'expence') {
-                expences.push(element)
-            }
-            if (element.type === 'income') {
-                income.push(element)
+    readFromDB(typeOfData, month, year) {
+        fetch(`/fetch/${typeOfData}`,{
+            method: 'GET',
+            headers: {
+                'Content-type': 'application/json',
+                month: month+ 1, // + 1 because js getdate returns month as digits starting with 0
+                year: year
             }
         })
-
-        return { expence: expences, income: income }
+        .then(response => response.json())
+        .then(response => response = {[typeOfData]: response})
+        .then(response => this.setState(response));
+        console.log(`done fetching ${typeOfData}`)
     }
 
-    writeToDB(data, type) {
-        fetch('/add', {
+    writeToDB(data, typeOfData, month, year) {
+        fetch(`/add/${typeOfData}`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json',
@@ -43,13 +39,14 @@ export default class AppContainer extends React.Component {
             body: JSON.stringify({
                 "name": data.name,
                 "value": data.value,
-                "type": type
+                "month": month + 1, // + 1 because js getdate returns month as digits starting with 0
+                "year": year
             })
         })
     }
 
-    deleteFromDB (key) {
-        fetch('/delete', {
+    deleteFromDB (key, typeOfData) {
+        fetch(`/delete/${typeOfData}`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json',
@@ -61,11 +58,32 @@ export default class AppContainer extends React.Component {
     }
 
     async componentDidMount() {
-        const responce = await fetch('/fetch');
-        const json = await responce.json();
-        const mappedData = this.mapDataFromDB(json)
-        mappedData.loading = false;
-        this.setState(mappedData)
+        var data = {};
+        
+        data.expences = await fetch(`/fetch/expences`,{
+            method: 'GET',
+            headers: {
+                'Content-type': 'application/json',
+                month: this.state.date.currentMonth + 1, // + 1 because js getdate returns month as digits starting with 0
+                year: this.state.date.currentYear
+            }
+        })
+        .then(response => response.json())
+        
+        data.income = await fetch(`/fetch/income`,{
+            method: 'GET',
+            headers: {
+                'Content-type': 'application/json',
+                month: this.state.date.currentMonth + 1, // + 1 because js getdate returns month as digits starting with 0
+                year: this.state.date.currentYear
+            }
+        })
+        .then(response => response.json())
+
+        data.loading = false;
+
+        this.setState(data);
+
     }
 
     render() {

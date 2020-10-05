@@ -40,6 +40,7 @@ export default class AllRowsOfType extends Component {
                         typeOfData={this.props.type}
                         deleteFromDB={this.props.deleteFromDB}
                         readFromDB={this.props.readFromDB}
+                        date={this.props.date}
                         key={item._id['$oid']} />)}
                     <SumRow data={this.props.data} />
                     {this.state.showAddRow && < AddRow
@@ -49,6 +50,7 @@ export default class AllRowsOfType extends Component {
                         changeVisibility={this.changeVisibility}
                         writeToDB={this.props.writeToDB}
                         readFromDB={this.props.readFromDB}
+                        date={this.props.date}
                         type={this.props.type}/>}
                 </div>
             )
