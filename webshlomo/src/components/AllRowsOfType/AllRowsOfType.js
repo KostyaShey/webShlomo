@@ -5,6 +5,7 @@ import TitleRow from '../TitleRow/TitleRow'
 import './AllRowsOfType.css'
 import InputRow from '../InputRow/InputRow'
 import ItemRow from '../ItemRow/ItemRow'
+import NoData from '../NoData/NoData'
 
 export default class AllRowsOfType extends Component {
 
@@ -28,11 +29,22 @@ export default class AllRowsOfType extends Component {
     render() {
         if (this.props.loading === true) {
             return (
-                <div>Loading</div>
+                <div>  
+                    <TitleRow name={this.props.type} />
+                    Loading
+                </div>
             )
         } else if (this.props.data.length === 0) {
             return (
-                <div>No data!</div>
+                <div>
+                    <TitleRow name={this.props.type} />
+                    <NoData 
+                        type={this.props.type}
+                        writeToDB={this.props.writeToDB}
+                        readFromDB={this.props.readFromDB}
+                        date={this.props.date}
+                        />
+                </div>
             )
         } else {
             return (

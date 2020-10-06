@@ -6,7 +6,7 @@ export default function ItemRow(props) {
     const handleClick = async () => {
         console.log(`Click on item ${props.item._id['$oid']}`);
         await props.deleteFromDB(props.item._id['$oid'], props.typeOfData);
-        props.readFromDB(props.typeOfData, props.date.currentMonth, props.date.currentYear);
+        props.readFromDB(props.typeOfData, props.date.selectedMonth, props.date.selectedYear);
     }    
     
     return (
