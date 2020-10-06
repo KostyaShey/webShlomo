@@ -40,3 +40,9 @@ input[type=number] {
 .noHover:hover {
   background-color: white;
 }
+
+.inputButtons {
+  position: relative;
+  top: 20%;
+  left: 10%;
+}

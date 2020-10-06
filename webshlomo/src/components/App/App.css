@@ -2,6 +2,8 @@
   margin: 5%;
 }
 
+
+
 p {
   color: #000;
   text-align: left;
@@ -17,9 +19,6 @@ button {
   font-size: 1.2em;
   margin: 0em 3%;
   box-shadow: 5px 7px 8px #888888;
-  position: relative;
-  top: 20%;
-  left: 30%;
   font-family: "FontAwesome";
 }
 
