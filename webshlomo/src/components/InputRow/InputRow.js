@@ -2,23 +2,22 @@ import React, { useState } from 'react'
 import './InputRow.css'
 
 export default function InputRow(props) {
-    const [name, setName] = useState('');
-    const [value, setValue] = useState('');
     
-    const handleChange = (event) => {
-        if (event.target.name === 'inputTitle') {
-            setName(event.target.value)
-        }
-        if (event.target.name === 'inputValue') {
-            setValue(event.target.value)
-        }
+    
+    const [userInput, setUserInput] = useState({})
+    
+    const handleChange = ({ target }) => {
+        const { name, value } = target;
+        setUserInput((prev) => ({
+            ...prev,
+            [name]: value
+          }));
     }
 
     const handleSubmit = async (event) => {
         event.preventDefault(); // prevendDefault disables the devault requests on submit.
-        await props.writeToDB({name: name, value: parseInt(value)}, props.type, props.date.currentMonth, props.date.currentYear);
-        setName('');
-        setValue('');
+        await props.writeToDB({name: userInput.inputTitle, value: parseInt(userInput.inputValue)}, props.type, props.date.currentMonth, props.date.currentYear);
+        setUserInput({inputTitle:'', inputValue:''})
         props.readFromDB(props.type, props.date.currentMonth, props.date.currentYear);
     }
     
@@ -29,14 +28,14 @@ export default function InputRow(props) {
                     <div className="inputTitle">
                         <input type="text"
                             name="inputTitle"
-                            value={name}
+                            value={userInput.inputTitle}
                             placeholder="Input Title"
                             onChange={handleChange} />
                     </div>
                     <div className="inputValue">
                         <input type="number"
                             name="inputValue"
-                            value={value}
+                            value={userInput.inputValue}
                             placeholder="Input Value"
                             onChange={handleChange} />
                     </div>
