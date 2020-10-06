@@ -8,7 +8,7 @@ export default class TitleRow extends Component {
             <div className="row">
                 <div className="leftBorder"></div>
                 <div className="title bold">
-                  <p>{this.props.name}</p>
+                  <p>{this.props.name.toUpperCase()}</p>
                 </div>
                 <div className="value"></div>
                 <div className="button"></div>

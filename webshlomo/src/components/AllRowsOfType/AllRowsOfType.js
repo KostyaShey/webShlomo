@@ -30,6 +30,10 @@ export default class AllRowsOfType extends Component {
             return (
                 <div>Loading</div>
             )
+        } else if (this.props.data.length === 0) {
+            return (
+                <div>No data!</div>
+            )
         } else {
             return (
                 <div>

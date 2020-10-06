@@ -1,27 +1,19 @@
 import React, { Component } from 'react'
 import './App.css';
 import AllRowsOfType from '../AllRowsOfType/AllRowsOfType'
+import MonthChanger from '../MonthChanger/MonthChanger'
 
 export default class App extends Component {
 
     render() {
 
-        const month = ["January","February","March","April","May","June","July","August","September","October","November","December"]
-
         return (
 
             <div className="App">
-                <div className="monthSwitcher">
-                    <div className="prevMonth">
-                        <button type="button" >&#xf04a;</button>
-                    </div>
-                    <div className="currentMonth">
-                        {month[this.props.data.date.currentMonth]}, {this.props.data.date.currentYear}
-                    </div>
-                    <div className="nextMonth">
-                        <button type="button" >&#xf04e;</button>
-                    </div>
-                </div>
+                <MonthChanger 
+                    date={this.props.data.date}
+                    changeMonth={this.props.changeMonth}
+                    readAllCollectionsFromDB={this.props.readAllCollectionsFromDB}/>
                 <div className="monthTable">
                     <AllRowsOfType
                         type={"expences"}

@@ -7,12 +7,17 @@ export default class AppContainer extends React.Component {
         super(props);
         this.state = {  loading: true,
                         date: { currentMonth: new Date().getMonth(),
-                                currentYear: new Date().getFullYear()}
+                                currentYear: new Date().getFullYear(),
+                                selectedMonth: new Date().getMonth(),
+                                selectedYear: new Date().getFullYear()
+                            }
                     };
 
         this.readFromDB = this.readFromDB.bind(this);
         this.writeToDB = this.writeToDB.bind(this);
         this.deleteFromDB = this.deleteFromDB.bind(this);
+        this.changeMonth = this.changeMonth.bind(this);
+        this.readAllCollectionsFromDB = this.readAllCollectionsFromDB.bind(this);
     }
 
     readFromDB(typeOfData, month, year) {
@@ -20,7 +25,7 @@ export default class AppContainer extends React.Component {
             method: 'GET',
             headers: {
                 'Content-type': 'application/json',
-                month: month+ 1, // + 1 because js getdate returns month as digits starting with 0
+                month: month + 1, // + 1 because js getdate returns month as digits starting with 0
                 year: year
             }
         })
@@ -28,6 +33,13 @@ export default class AppContainer extends React.Component {
         .then(response => response = {[typeOfData]: response})
         .then(response => this.setState(response));
         console.log(`done fetching ${typeOfData}`)
+    }
+
+    readAllCollectionsFromDB(month, year) {
+        const collections = ['income', 'expences']
+        for(var i=0; i<collections.length; i++){
+            this.readFromDB(collections[i], month, year)
+        } 
     }
 
     writeToDB(data, typeOfData, month, year) {
@@ -57,33 +69,46 @@ export default class AppContainer extends React.Component {
         })
     }
 
+    changeMonth (increment) {
+
+        var newMonth = this.state.date.selectedMonth;
+        var newYear = this.state.date.selectedYear;
+
+        if (this.state.date.selectedMonth === 11 && increment > 0) {
+            newMonth = 0;
+            newYear = newYear + 1;
+        } else if (this.state.date.selectedMonth === 0 && increment < 0) {
+            newMonth = 11;
+            newYear = newYear - 1;
+        } else {
+            newMonth = newMonth + increment;
+        }
+
+        this.setState({date: {
+            ...this.state.date,
+            selectedMonth: newMonth,
+            selectedYear: newYear
+        }})
+    }
+
     async componentDidMount() {
         var data = {};
-        
-        data.expences = await fetch(`/fetch/expences`,{
-            method: 'GET',
-            headers: {
-                'Content-type': 'application/json',
-                month: this.state.date.currentMonth + 1, // + 1 because js getdate returns month as digits starting with 0
-                year: this.state.date.currentYear
-            }
-        })
-        .then(response => response.json())
-        
-        data.income = await fetch(`/fetch/income`,{
-            method: 'GET',
-            headers: {
-                'Content-type': 'application/json',
-                month: this.state.date.currentMonth + 1, // + 1 because js getdate returns month as digits starting with 0
-                year: this.state.date.currentYear
-            }
-        })
-        .then(response => response.json())
+
+        const collections = ['income', 'expences']
+        for(var i=0; i<collections.length; i++){
+            data[collections[i]] = await fetch(`/fetch/${collections[i]}`,{
+                method: 'GET',
+                headers: {
+                    'Content-type': 'application/json',
+                    month: this.state.date.currentMonth + 1, // + 1 because js getdate returns month as digits starting with 0
+                    year: this.state.date.currentYear
+                }
+            })
+            .then(response => response.json())
+        } 
 
         data.loading = false;
-
         this.setState(data);
-
     }
 
     render() {
@@ -91,6 +116,8 @@ export default class AppContainer extends React.Component {
         return <App data={this.state}
             writeToDB={this.writeToDB}
             readFromDB={this.readFromDB}
-            deleteFromDB={this.deleteFromDB} />;
+            deleteFromDB={this.deleteFromDB} 
+            changeMonth={this.changeMonth}
+            readAllCollectionsFromDB={this.readAllCollectionsFromDB}/>;
     }
 }
