@@ -27,14 +27,7 @@ export default class AllRowsOfType extends Component {
     }
 
     render() {
-        if (this.props.loading === true) {
-            return (
-                <div>  
-                    <TitleRow name={this.props.typeOfData} />
-                    Loading
-                </div>
-            )
-        } else if (this.props.data.length === 0) {
+        if (this.props.data.length === 0) {
             return (
                 <div>
                     <TitleRow name={this.props.typeOfData} />

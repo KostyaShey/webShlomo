@@ -10,31 +10,47 @@ export default class App extends Component {
         return (
 
             <div className="App">
-                <MonthChanger 
+                 <MonthChanger 
                     date={this.props.data.date}
                     changeMonth={this.props.changeMonth}
                     readAllCollectionsFromDB={this.props.readAllCollectionsFromDB}/>
-                <div className="monthTable">
-                    <AllRowsOfType
+            <div className="monthTable">
+                {!this.props.data.loading && <AllRowsOfType
                         typeOfData={"expences"}
-                        loading={this.props.data.loading}
                         data={this.props.data.expences}
                         writeToDB={this.props.writeToDB}
                         readFromDB={this.props.readFromDB}
                         deleteFromDB={this.props.deleteFromDB}
                         updateInDB={this.props.updateInDB}
                         date={this.props.data.date}
-                         />
-                    <AllRowsOfType
+                         />}
+                {!this.props.data.loading && <AllRowsOfType
                         typeOfData={"income"}
-                        loading={this.props.data.loading}
                         data={this.props.data.income}
                         writeToDB={this.props.writeToDB}
                         readFromDB={this.props.readFromDB}
                         deleteFromDB={this.props.deleteFromDB}
                         updateInDB={this.props.updateInDB}
-                        date={this.props.data.date} />
-                </div>
+                        date={this.props.data.date} />}
+            </div>
+            <div className="monthTable">
+                {!this.props.data.loading && <AllRowsOfType
+                        typeOfData={"mExpences"}
+                        data={this.props.data.mExpences}
+                        writeToDB={this.props.writeToDB}
+                        readFromDB={this.props.readFromDB}
+                        deleteFromDB={this.props.deleteFromDB}
+                        updateInDB={this.props.updateInDB}
+                        date={this.props.data.date} />}
+                {!this.props.data.loading && <AllRowsOfType
+                        typeOfData={"mIncome"}
+                        data={this.props.data.mIncome}
+                        writeToDB={this.props.writeToDB}
+                        readFromDB={this.props.readFromDB}
+                        deleteFromDB={this.props.deleteFromDB}
+                        updateInDB={this.props.updateInDB}
+                        date={this.props.data.date} />}
+            </div>
             </div>
         )
     }

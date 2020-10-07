@@ -38,7 +38,7 @@ export default class AppContainer extends React.Component {
     }
 
     readAllCollectionsFromDB(month, year) {
-        const collections = ['income', 'expences']
+        const collections = ['income', 'expences', 'mExpences', 'mIncome']
         for(var i=0; i<collections.length; i++){
             this.readFromDB(collections[i], month, year)
         } 
