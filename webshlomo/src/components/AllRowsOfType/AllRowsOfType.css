@@ -40,3 +40,11 @@
     -ms-transition: all 0.2s;
     -o-transition: all 0.2s;
   }
+
+  @media (orientation: portrait) {
+    .row {
+      display: grid;
+      grid-template-columns: minmax(2%, 10%) minmax(20%, 50%) minmax(10%, 15%) minmax(10%, auto);
+      border-bottom: 1px dotted #ccc;
+    }
+  }
