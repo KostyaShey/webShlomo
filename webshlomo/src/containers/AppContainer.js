@@ -16,6 +16,7 @@ export default class AppContainer extends React.Component {
         this.readFromDB = this.readFromDB.bind(this);
         this.writeToDB = this.writeToDB.bind(this);
         this.deleteFromDB = this.deleteFromDB.bind(this);
+        this.updateInDB = this.updateInDB.bind(this);
         this.changeMonth = this.changeMonth.bind(this);
         this.readAllCollectionsFromDB = this.readAllCollectionsFromDB.bind(this);
     }
@@ -69,6 +70,20 @@ export default class AppContainer extends React.Component {
         })
     }
 
+    updateInDB (updatedData, key, typeOfData) {
+        fetch(`/update/${typeOfData}`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify({
+                "id": key,
+                "name": updatedData.name,
+                "value": updatedData.value
+            })
+        })
+    }
+
     changeMonth (increment) {
 
         var newMonth = this.state.date.selectedMonth;
@@ -116,7 +131,8 @@ export default class AppContainer extends React.Component {
         return <App data={this.state}
             writeToDB={this.writeToDB}
             readFromDB={this.readFromDB}
-            deleteFromDB={this.deleteFromDB} 
+            deleteFromDB={this.deleteFromDB}
+            updateInDB={this.updateInDB} 
             changeMonth={this.changeMonth}
             readAllCollectionsFromDB={this.readAllCollectionsFromDB}/>;
     }

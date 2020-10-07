@@ -16,21 +16,23 @@ export default class App extends Component {
                     readAllCollectionsFromDB={this.props.readAllCollectionsFromDB}/>
                 <div className="monthTable">
                     <AllRowsOfType
-                        type={"expences"}
+                        typeOfData={"expences"}
                         loading={this.props.data.loading}
                         data={this.props.data.expences}
                         writeToDB={this.props.writeToDB}
                         readFromDB={this.props.readFromDB}
                         deleteFromDB={this.props.deleteFromDB}
+                        updateInDB={this.props.updateInDB}
                         date={this.props.data.date}
                          />
                     <AllRowsOfType
-                        type={"income"}
+                        typeOfData={"income"}
                         loading={this.props.data.loading}
                         data={this.props.data.income}
                         writeToDB={this.props.writeToDB}
                         readFromDB={this.props.readFromDB}
                         deleteFromDB={this.props.deleteFromDB}
+                        updateInDB={this.props.updateInDB}
                         date={this.props.data.date} />
                 </div>
             </div>

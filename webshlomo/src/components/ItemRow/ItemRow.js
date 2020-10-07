@@ -1,26 +1,36 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './ItemRow.css';
+import EditItem from './EditItem/EditItem'
+import ShowItem from './ShowItem/ShowItem'
 
 export default function ItemRow(props) {
     
-    const handleClick = async () => {
-        console.log(`Click on item ${props.item._id['$oid']}`);
-        await props.deleteFromDB(props.item._id['$oid'], props.typeOfData);
-        props.readFromDB(props.typeOfData, props.date.selectedMonth, props.date.selectedYear);
-    }    
+    const [editMode, setEditMode] = useState(false);
+
+    const handleClickEdit = () => {
+        setEditMode((prev) => !prev)
+    }
     
-    return (
-        <div className="row" >
-            <div className="leftBorder"></div>
-            <div className="title">
-                <p>{props.item.name}</p>
-            </div>
-            <div className="value">
-                <p className="numbersAlign">{props.item.value} €</p>
-            </div>
-            <div className="button trash">
-                <button type="button" onClick={handleClick}>&#xf2ed;</button>
-            </div>
-        </div>
-    )
+    if (editMode) {
+        return (
+            <EditItem 
+                setEditMode={setEditMode}
+                item={props.item}
+                typeOfData={props.typeOfData}
+                readFromDB={props.readFromDB}
+                updateInDB={props.updateInDB}
+                date={props.date}/>
+        )
+    } else {
+        return (
+            <ShowItem 
+                setEditMode={setEditMode}
+                item={props.item}
+                typeOfData={props.typeOfData}
+                deleteFromDB={props.deleteFromDB}
+                readFromDB={props.readFromDB}
+                date={props.date}
+                />
+        )
+    }
 }
