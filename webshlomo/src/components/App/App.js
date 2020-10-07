@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './App.css';
 import AllRowsOfType from '../AllRowsOfType/AllRowsOfType'
 import MonthChanger from '../MonthChanger/MonthChanger'
+import MDataSummary from '../MDataSummary/MDataSummary';
 
 export default class App extends Component {
 
@@ -34,22 +35,14 @@ export default class App extends Component {
                         date={this.props.data.date} />}
             </div>
             <div className="monthTable">
-                {!this.props.data.loading && <AllRowsOfType
+                {!this.props.data.loading && <MDataSummary
                         typeOfData={"mExpences"}
                         data={this.props.data.mExpences}
-                        writeToDB={this.props.writeToDB}
-                        readFromDB={this.props.readFromDB}
-                        deleteFromDB={this.props.deleteFromDB}
-                        updateInDB={this.props.updateInDB}
-                        date={this.props.data.date} />}
-                {!this.props.data.loading && <AllRowsOfType
+                        />}
+                {!this.props.data.loading && <MDataSummary
                         typeOfData={"mIncome"}
                         data={this.props.data.mIncome}
-                        writeToDB={this.props.writeToDB}
-                        readFromDB={this.props.readFromDB}
-                        deleteFromDB={this.props.deleteFromDB}
-                        updateInDB={this.props.updateInDB}
-                        date={this.props.data.date} />}
+                        />}
             </div>
             </div>
         )

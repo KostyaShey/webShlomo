@@ -49,7 +49,6 @@ def delete(type_of_data):
     _json = request.json
     _id = _json['id']
     id = mongo.db[type_of_data].delete_one({'_id': ObjectId(_id)})
-
     return dumps({'success':True}), 200, {'ContentType':'application/json'} 
 
 #update one document from <type_of_data> collection

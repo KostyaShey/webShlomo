@@ -44,7 +44,7 @@
   @media (orientation: portrait) {
     .row {
       display: grid;
-      grid-template-columns: minmax(2%, 10%) minmax(20%, 50%) minmax(10%, 15%) minmax(10%, auto);
+      grid-template-columns: minmax(2%, 8%) minmax(20%, 55%) minmax(10%, 12%) minmax(10%, auto);
       border-bottom: 1px dotted #ccc;
     }
   }

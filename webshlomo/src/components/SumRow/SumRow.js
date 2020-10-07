@@ -15,7 +15,7 @@ export default class SumRow extends Component {
                   <p className='numbersAlign'>{valueSum} €</p>
                 </div>
                 <div className="button"></div>
-              </div>
+            </div>
         )
     }
 }
