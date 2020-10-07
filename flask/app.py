@@ -28,7 +28,7 @@ def add_data(type_of_data):
 
 #fetch documents from the collection of <type_of_data>
 @app.route('/fetch/<type_of_data>')
-def new_fetch(type_of_data):
+def fetch(type_of_data):
 
     _month = int(request.headers["month"])
     _year = int(request.headers["year"])
