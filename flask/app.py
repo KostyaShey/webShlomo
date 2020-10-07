@@ -32,8 +32,13 @@ def fetch(type_of_data):
 
     _month = int(request.headers["month"])
     _year = int(request.headers["year"])
+    _typeOfData = request.headers["typeOfData"]
 
-    data = mongo.db[type_of_data].find({"month": _month, "year": _year})
+    if _typeOfData == "expences" or _typeOfData  == "income":
+        data = mongo.db[type_of_data].find({"month": _month, "year": _year})
+
+    if _typeOfData == "mExpences" or _typeOfData  == "mIncome":
+        data = mongo.db[type_of_data].find({"month": { "$in": [_month] }, "years": { "$in": [_year] }})
 
     response = dumps(data)
     return response    

@@ -27,7 +27,8 @@ export default class AppContainer extends React.Component {
             headers: {
                 'Content-type': 'application/json',
                 month: month + 1, // + 1 because js getdate returns month as digits starting with 0
-                year: year
+                year: year,
+                typeOfData: typeOfData 
             }
         })
         .then(response => response.json())
@@ -109,14 +110,15 @@ export default class AppContainer extends React.Component {
     async componentDidMount() {
         var data = {};
 
-        const collections = ['income', 'expences']
+        const collections = ['income', 'expences', 'mExpences', 'mIncome']
         for(var i=0; i<collections.length; i++){
             data[collections[i]] = await fetch(`/fetch/${collections[i]}`,{
                 method: 'GET',
                 headers: {
                     'Content-type': 'application/json',
                     month: this.state.date.currentMonth + 1, // + 1 because js getdate returns month as digits starting with 0
-                    year: this.state.date.currentYear
+                    year: this.state.date.currentYear,
+                    typeOfData: collections[i]
                 }
             })
             .then(response => response.json())
