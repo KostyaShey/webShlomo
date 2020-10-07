@@ -6,9 +6,9 @@ from bson.objectid import ObjectId
 from flask import jsonify, request
 from werkzeug.security import generate_password_hash, check_password_hash
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='../webshlomo/build', static_url_path='/')
 app.secret_key = "kostya"
-app.config['MONGO_URI'] = 'mongodb://localhost:27017/webShlomo'
+app.config['MONGO_URI'] = 'mongodb+srv://VzeRqbIBszO37fHk:VzeRqbIBszO37fHk@webshlomo.zmvgv.azure.mongodb.net/webShlomo?retryWrites=true&w=majority'
 mongo = PyMongo(app)
 
 #add a document to the collection of <type_of_data>
@@ -32,8 +32,13 @@ def fetch(type_of_data):
 
     _month = int(request.headers["month"])
     _year = int(request.headers["year"])
+    _typeOfData = request.headers["typeOfData"]
 
-    data = mongo.db[type_of_data].find({"month": _month, "year": _year})
+    if _typeOfData == "expences" or _typeOfData  == "income":
+        data = mongo.db[type_of_data].find({"month": _month, "year": _year})
+
+    if _typeOfData == "mExpences" or _typeOfData  == "mIncome":
+        data = mongo.db[type_of_data].find({"month": { "$in": [_month] }, "years": { "$in": [_year] }})
 
     response = dumps(data)
     return response    
@@ -44,7 +49,6 @@ def delete(type_of_data):
     _json = request.json
     _id = _json['id']
     id = mongo.db[type_of_data].delete_one({'_id': ObjectId(_id)})
-
     return dumps({'success':True}), 200, {'ContentType':'application/json'} 
 
 #update one document from <type_of_data> collection

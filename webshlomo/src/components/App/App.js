@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './App.css';
 import AllRowsOfType from '../AllRowsOfType/AllRowsOfType'
 import MonthChanger from '../MonthChanger/MonthChanger'
+import MDataSummary from '../MDataSummary/MDataSummary';
 
 export default class App extends Component {
 
@@ -10,31 +11,39 @@ export default class App extends Component {
         return (
 
             <div className="App">
-                <MonthChanger 
+                 <MonthChanger 
                     date={this.props.data.date}
                     changeMonth={this.props.changeMonth}
                     readAllCollectionsFromDB={this.props.readAllCollectionsFromDB}/>
-                <div className="monthTable">
-                    <AllRowsOfType
+            <div className="monthTable">
+                {!this.props.data.loading && <AllRowsOfType
                         typeOfData={"expences"}
-                        loading={this.props.data.loading}
                         data={this.props.data.expences}
                         writeToDB={this.props.writeToDB}
                         readFromDB={this.props.readFromDB}
                         deleteFromDB={this.props.deleteFromDB}
                         updateInDB={this.props.updateInDB}
                         date={this.props.data.date}
-                         />
-                    <AllRowsOfType
+                         />}
+                {!this.props.data.loading && <AllRowsOfType
                         typeOfData={"income"}
-                        loading={this.props.data.loading}
                         data={this.props.data.income}
                         writeToDB={this.props.writeToDB}
                         readFromDB={this.props.readFromDB}
                         deleteFromDB={this.props.deleteFromDB}
                         updateInDB={this.props.updateInDB}
-                        date={this.props.data.date} />
-                </div>
+                        date={this.props.data.date} />}
+            </div>
+            <div className="monthTable">
+                {!this.props.data.loading && <MDataSummary
+                        typeOfData={"mExpences"}
+                        data={this.props.data.mExpences}
+                        />}
+                {!this.props.data.loading && <MDataSummary
+                        typeOfData={"mIncome"}
+                        data={this.props.data.mIncome}
+                        />}
+            </div>
             </div>
         )
     }

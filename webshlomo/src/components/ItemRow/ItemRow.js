@@ -6,10 +6,6 @@ import ShowItem from './ShowItem/ShowItem'
 export default function ItemRow(props) {
     
     const [editMode, setEditMode] = useState(false);
-
-    const handleClickEdit = () => {
-        setEditMode((prev) => !prev)
-    }
     
     if (editMode) {
         return (

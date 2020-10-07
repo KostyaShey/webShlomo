@@ -3,6 +3,7 @@
     border: 1px solid #dedede;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
     width: 100%;
+    margin-bottom: 1.5em;
   }
   
   .row {
@@ -38,4 +39,12 @@
     -moz-transition: all 0.2s;
     -ms-transition: all 0.2s;
     -o-transition: all 0.2s;
+  }
+
+  @media (orientation: portrait) {
+    .row {
+      display: grid;
+      grid-template-columns: minmax(2%, 8%) minmax(20%, 55%) minmax(10%, 12%) minmax(10%, auto);
+      border-bottom: 1px dotted #ccc;
+    }
   }

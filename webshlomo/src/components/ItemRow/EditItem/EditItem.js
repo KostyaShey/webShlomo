@@ -15,8 +15,10 @@ export default function InputRow(props) {
 
     const handleSubmit = async (event) => {
         event.preventDefault(); // prevendDefault disables the devault requests on submit.
-        await props.updateInDB({name: userInput.inputTitle, value: parseInt(userInput.inputValue)}, props.item._id['$oid'], props.typeOfData);
-        await props.readFromDB(props.typeOfData, props.date.selectedMonth, props.date.selectedYear);
+        //To Do: ask some1 smart how to properly chain two requests
+        const test1 = await props.updateInDB({name: userInput.inputTitle, value: parseInt(userInput.inputValue)}, props.item._id['$oid'], props.typeOfData);
+        const test2 = await props.readFromDB(props.typeOfData, props.date.selectedMonth, props.date.selectedYear);
+        console.log(test2)
         props.setEditMode()
     }
 
@@ -43,7 +45,7 @@ export default function InputRow(props) {
                         placeholder="Input Value"
                         onChange={handleChange} />
                 </div>
-                <div className="inputButtons inputButtons">
+                <div className="inputButtons">
                     <button type="button" onClick={handleClickEditMode}>&#xf05e;</button>
                     <button type="submit">&#xf00c;</button>
                 </div>
