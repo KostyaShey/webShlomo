@@ -30,16 +30,16 @@ export default class AllRowsOfType extends Component {
         if (this.props.loading === true) {
             return (
                 <div>  
-                    <TitleRow name={this.props.type} />
+                    <TitleRow name={this.props.typeOfData} />
                     Loading
                 </div>
             )
         } else if (this.props.data.length === 0) {
             return (
                 <div>
-                    <TitleRow name={this.props.type} />
+                    <TitleRow name={this.props.typeOfData} />
                     <NoData 
-                        type={this.props.type}
+                        type={this.props.typeOfData}
                         writeToDB={this.props.writeToDB}
                         readFromDB={this.props.readFromDB}
                         date={this.props.date}
@@ -49,25 +49,25 @@ export default class AllRowsOfType extends Component {
         } else {
             return (
                 <div>
-                    <TitleRow name={this.props.type} />
+                    <TitleRow name={this.props.typeOfData} />
                     {this.props.data.map(item => <ItemRow
                         item={item}
-                        removeRowFromList={this.props.removeRowFromList}
-                        typeOfData={this.props.type}
+                        typeOfData={this.props.typeOfData}
                         deleteFromDB={this.props.deleteFromDB}
                         readFromDB={this.props.readFromDB}
+                        updateInDB={this.props.updateInDB}
                         date={this.props.date}
                         key={item._id['$oid']} />)}
                     <SumRow data={this.props.data} />
                     {this.state.showAddRow && < AddRow
-                        type={this.props.type}
+                        typeOfData={this.props.typeOfData}
                         changeVisibility={this.changeVisibility} />}
                     {this.state.showInputRow && <InputRow
                         changeVisibility={this.changeVisibility}
                         writeToDB={this.props.writeToDB}
                         readFromDB={this.props.readFromDB}
                         date={this.props.date}
-                        type={this.props.type}/>}
+                        typeOfData={this.props.typeOfData}/>}
                 </div>
             )
         }

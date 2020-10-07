@@ -46,3 +46,15 @@ def delete(type_of_data):
     id = mongo.db[type_of_data].delete_one({'_id': ObjectId(_id)})
 
     return dumps({'success':True}), 200, {'ContentType':'application/json'} 
+
+#update one document from <type_of_data> collection
+@app.route('/update/<type_of_data>', methods=['POST'])
+def update(type_of_data):
+    _json = request.json
+    _id = _json['id']
+    _name = _json['name']
+    _value = _json['value']
+
+    id = mongo.db[type_of_data].update_one({'_id': ObjectId(_id)}, {'$set': {'name': _name, 'value': _value}})
+
+    return dumps({'success':True}), 200, {'ContentType':'application/json'} 

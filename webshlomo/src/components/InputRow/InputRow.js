@@ -16,9 +16,9 @@ export default function InputRow(props) {
 
     const handleSubmit = async (event) => {
         event.preventDefault(); // prevendDefault disables the devault requests on submit.
-        await props.writeToDB({name: userInput.inputTitle, value: parseInt(userInput.inputValue)}, props.type, props.date.selectedMonth, props.date.selectedYear);
+        await props.writeToDB({name: userInput.inputTitle, value: parseInt(userInput.inputValue)}, props.typeOfData, props.date.selectedMonth, props.date.selectedYear);
         setUserInput({inputTitle:'', inputValue:''})
-        props.readFromDB(props.type, props.date.selectedMonth, props.date.selectedYear);
+        props.readFromDB(props.typeOfData, props.date.selectedMonth, props.date.selectedYear);
     }
     
     return (
