@@ -11,6 +11,10 @@ app.secret_key = "kostya"
 app.config['MONGO_URI'] = 'mongodb+srv://VzeRqbIBszO37fHk:VzeRqbIBszO37fHk@webshlomo.zmvgv.azure.mongodb.net/webShlomo?retryWrites=true&w=majority'
 mongo = PyMongo(app)
 
+@app.route('/')
+def index():
+    return app.send_static_file('index.html')
+
 #add a document to the collection of <type_of_data>
 @app.route('/add/<type_of_data>', methods=['POST'])
 def add_data(type_of_data):
@@ -24,7 +28,10 @@ def add_data(type_of_data):
         id = mongo.db[type_of_data].insert(
             {'name': _name, 'value': _value, 'month': _month, 'year': _year})
 
-    return dumps({'success':True}), 200, {'ContentType':'application/json'} 
+    data = mongo.db[type_of_data].find({"month": _month, "year": _year})
+
+    response = dumps(data)
+    return response  
 
 #fetch documents from the collection of <type_of_data>
 @app.route('/fetch/<type_of_data>')
@@ -48,8 +55,15 @@ def fetch(type_of_data):
 def delete(type_of_data):
     _json = request.json
     _id = _json['id']
+    _month = int(_json["month"])
+    _year = int(_json["year"])
+
     id = mongo.db[type_of_data].delete_one({'_id': ObjectId(_id)})
-    return dumps({'success':True}), 200, {'ContentType':'application/json'} 
+
+    data = mongo.db[type_of_data].find({"month": _month, "year": _year})
+
+    response = dumps(data)
+    return response  
 
 #update one document from <type_of_data> collection
 @app.route('/update/<type_of_data>', methods=['POST'])
@@ -58,7 +72,12 @@ def update(type_of_data):
     _id = _json['id']
     _name = _json['name']
     _value = _json['value']
+    _month = int(_json["month"])
+    _year = int(_json["year"])
 
     id = mongo.db[type_of_data].update_one({'_id': ObjectId(_id)}, {'$set': {'name': _name, 'value': _value}})
 
-    return dumps({'success':True}), 200, {'ContentType':'application/json'} 
+    data = mongo.db[type_of_data].find({"month": _month, "year": _year})
+
+    response = dumps(data)
+    return response  

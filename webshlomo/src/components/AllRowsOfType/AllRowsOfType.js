@@ -32,9 +32,8 @@ export default class AllRowsOfType extends Component {
                 <div>
                     <TitleRow name={this.props.typeOfData} />
                     <NoData 
-                        type={this.props.typeOfData}
+                        typeOfData={this.props.typeOfData}
                         writeToDB={this.props.writeToDB}
-                        readFromDB={this.props.readFromDB}
                         date={this.props.date}
                         />
                 </div>
@@ -47,7 +46,6 @@ export default class AllRowsOfType extends Component {
                         item={item}
                         typeOfData={this.props.typeOfData}
                         deleteFromDB={this.props.deleteFromDB}
-                        readFromDB={this.props.readFromDB}
                         updateInDB={this.props.updateInDB}
                         date={this.props.date}
                         key={item._id['$oid']} />)}
@@ -58,7 +56,6 @@ export default class AllRowsOfType extends Component {
                     {this.state.showInputRow && <InputRow
                         changeVisibility={this.changeVisibility}
                         writeToDB={this.props.writeToDB}
-                        readFromDB={this.props.readFromDB}
                         date={this.props.date}
                         typeOfData={this.props.typeOfData}/>}
                 </div>

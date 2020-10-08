@@ -24,9 +24,8 @@ export default function NoData(props) {
             {inputRowVisibility && <InputRow
                                             changeVisibility={changeVisibility}
                                             writeToDB={props.writeToDB}
-                                            readFromDB={props.readFromDB}
                                             date={props.date}
-                                            type={props.type}/>}
+                                            typeOfData={props.typeOfData}/>}
 
         </div>
     )
