@@ -1,3 +1,7 @@
 .inactive p{
     color: lightgrey;
 }
+
+.paddingleft {
+    padding-left: 0.7em;
+}

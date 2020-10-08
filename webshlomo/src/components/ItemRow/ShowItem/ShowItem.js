@@ -9,9 +9,9 @@ export default function ShowItem(props) {
 
     let checkInactiveClass = "";
     if (props.inactive) {
-        checkInactiveClass = "title inactive"
+        checkInactiveClass = "title inactive paddingleft"
     } else {
-        checkInactiveClass = "title"
+        checkInactiveClass = "title paddingleft"
     }
 
     return (
