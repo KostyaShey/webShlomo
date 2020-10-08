@@ -16,10 +16,8 @@ export default function InputRow(props) {
 
     const handleSubmit = async (event) => {
         event.preventDefault(); // prevendDefault disables the devault requests on submit.
-        //To Do: ask some1 smart how to properly chain two requests
-        const test1 = await props.writeToDB({name: userInput.inputTitle, value: parseInt(userInput.inputValue)}, props.typeOfData, props.date.selectedMonth, props.date.selectedYear);
+        props.writeToDB({name: userInput.inputTitle, value: parseInt(userInput.inputValue)}, props.typeOfData, props.date.selectedMonth, props.date.selectedYear);
         setUserInput({inputTitle:'', inputValue:''})
-        props.readFromDB(props.typeOfData, props.date.selectedMonth, props.date.selectedYear);
     }
     
     return (

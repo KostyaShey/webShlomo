@@ -3,9 +3,7 @@ import React from 'react'
 export default function ShowItem(props) {
     
     const handleClickDelete = async () => {
-        //To Do: ask some1 smart how to properly chain two requests
-        const test1 = await props.deleteFromDB(props.item._id['$oid'], props.typeOfData);
-        const test2 = props.readFromDB(props.typeOfData, props.date.selectedMonth, props.date.selectedYear);
+        props.deleteFromDB(props.item._id['$oid'], props.typeOfData);
     }
 
     return (

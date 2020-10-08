@@ -57,21 +57,35 @@ export default class AppContainer extends React.Component {
                 "year": year
             })
         })
+        .then(response => response.json())
+        .then(response => this.setState({[typeOfData]: response}))
     }
 
     deleteFromDB (key, typeOfData) {
+
+        var month = this.state.date.selectedMonth + 1; // + 1 because js getdate returns month as digits starting with 0
+        var year = this.state.date.selectedYear;        
+
         fetch(`/delete/${typeOfData}`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json',
             },
             body: JSON.stringify({
-                "id": key
+                "id": key,
+                "month": month,
+                "year": year
             })
         })
+        .then(response => response.json())
+        .then(response => this.setState({[typeOfData]: response}))
     }
 
     updateInDB (updatedData, key, typeOfData) {
+        
+        var month = this.state.date.selectedMonth + 1; // + 1 because js getdate returns month as digits starting with 0
+        var year = this.state.date.selectedYear;   
+        
         fetch(`/update/${typeOfData}`, {
             method: 'POST',
             headers: {
@@ -80,9 +94,13 @@ export default class AppContainer extends React.Component {
             body: JSON.stringify({
                 "id": key,
                 "name": updatedData.name,
-                "value": updatedData.value
+                "value": updatedData.value,
+                "month": month,
+                "year": year
             })
         })
+        .then(response => response.json())
+        .then(response => this.setState({[typeOfData]: response}))
     }
 
     changeMonth (increment) {

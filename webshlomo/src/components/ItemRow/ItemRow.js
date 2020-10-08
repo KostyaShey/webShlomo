@@ -13,7 +13,6 @@ export default function ItemRow(props) {
                 setEditMode={setEditMode}
                 item={props.item}
                 typeOfData={props.typeOfData}
-                readFromDB={props.readFromDB}
                 updateInDB={props.updateInDB}
                 date={props.date}/>
         )
@@ -24,7 +23,6 @@ export default function ItemRow(props) {
                 item={props.item}
                 typeOfData={props.typeOfData}
                 deleteFromDB={props.deleteFromDB}
-                readFromDB={props.readFromDB}
                 date={props.date}
                 />
         )
