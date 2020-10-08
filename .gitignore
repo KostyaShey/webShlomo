@@ -9,7 +9,7 @@
 /webshlomo/coverage
 
 # production
-
+/flask/.env
 
 # misc
 /webshlomo/.DS_Store
