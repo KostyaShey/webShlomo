@@ -38,10 +38,12 @@ export default class App extends Component {
                 {!this.props.data.loading && <MDataSummary
                         typeOfData={"mExpences"}
                         data={this.props.data.mExpences}
+                        deleteFromDB={this.props.deleteFromDB}
                         />}
                 {!this.props.data.loading && <MDataSummary
                         typeOfData={"mIncome"}
                         data={this.props.data.mIncome}
+                        deleteFromDB={this.props.deleteFromDB}
                         />}
             </div>
             </div>

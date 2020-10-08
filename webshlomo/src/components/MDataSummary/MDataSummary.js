@@ -16,7 +16,9 @@ export default function MDataSummary(props) {
                 />
             {showDetails && props.data.map(item => <ItemRow
                         item={item}
-                        key={item._id['$oid']} />)}
+                        key={item._id['$oid']}
+                        deleteFromDB={this.props.deleteFromDB}
+                        />)}
         </div>
     )
 }
