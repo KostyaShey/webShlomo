@@ -47,6 +47,7 @@ export default function MDataSummary(props) {
                         key={item._id['$oid']}
                         deleteFromDB={props.deleteFromDB}
                         />)}
+            {showDetails && noData(activeDataThisMonth) && <NoData />}
             {showDetails && <TextRow 
                         text={textForInactive}
                         inactive={true}
