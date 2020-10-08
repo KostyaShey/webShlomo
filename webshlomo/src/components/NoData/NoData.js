@@ -17,16 +17,21 @@ export default function NoData(props) {
     
     return (
         <div>
-            <p id="noData">No Data available<br/>¯\_(ツ)_/¯</p>
-            {addRowVisibility && < AddRow
-                                            type={props.type}
-                                            changeVisibility={changeVisibility} />}
-            {inputRowVisibility && <InputRow
-                                            changeVisibility={changeVisibility}
-                                            writeToDB={props.writeToDB}
-                                            date={props.date}
-                                            typeOfData={props.typeOfData}/>}
+        <div className="row item">
+            <div className="leftBorder"></div>
+            <div className="title">
+            <p className="noData">No Data available<br/>¯\_(ツ)_/¯</p>
+            </div>
+            
 
         </div>
+        {addRowVisibility && < AddRow
+            type={props.type}
+            changeVisibility={changeVisibility} />}
+        {inputRowVisibility && <InputRow
+            changeVisibility={changeVisibility}
+            writeToDB={props.writeToDB}
+            date={props.date}
+            typeOfData={props.typeOfData}/>}</div>
     )
 }

@@ -24,6 +24,7 @@ export default function ItemRow(props) {
                 typeOfData={props.typeOfData}
                 deleteFromDB={props.deleteFromDB}
                 date={props.date}
+                inactive={props.inactive}
                 />
         )
     }

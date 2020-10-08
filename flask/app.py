@@ -46,7 +46,7 @@ def fetch(type_of_data):
         data = mongo.db[type_of_data].find({"month": _month, "year": _year})
 
     if _typeOfData == "mExpences" or _typeOfData  == "mIncome":
-        data = mongo.db[type_of_data].find({"month": { "$in": [_month] }, "years": { "$in": [_year] }})
+        data = mongo.db[type_of_data].find()
 
     response = dumps(data)
     return response    

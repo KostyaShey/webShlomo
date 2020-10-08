@@ -1,4 +1,6 @@
-#noData {
+.noData {
+    position: relative;
+    left: 24%;
     text-align: center;
     padding: 1.5em 0;
     border-bottom: 1px dotted #ccc;
