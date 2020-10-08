@@ -9,7 +9,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__, static_folder='../webshlomo/build', static_url_path='/')
 app.secret_key = "kostya"
-app.config['MONGO_URI'] = os.environ['WEBSITE_SITE_NAME']
+app.config['MONGO_URI'] = os.environ['MONGO_DB_LINK']
 mongo = PyMongo(app)
 
 @app.route('/')
