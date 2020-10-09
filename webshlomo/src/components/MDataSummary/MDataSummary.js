@@ -55,8 +55,10 @@ export default function MDataSummary(props) {
                         isActive={true}/>}
             {showDetails && activeDataThisMonth.current.map(item => <ItemRow
                         item={item}
+                        typeOfData={"mExpences"}
                         key={item._id['$oid']}
                         deleteFromDB={props.deleteFromDB}
+                        updateInDB={props.updateInDB}
                         isMonthData={true}
                         isActive={true}
                         />)}
@@ -67,8 +69,10 @@ export default function MDataSummary(props) {
                         />}
             {showDetails && inactiveDataThisMonth.current.map(item => <ItemRow
                         item={item}
+                        typeOfData={"mIncome"}
                         key={item._id['$oid']}
                         deleteFromDB={props.deleteFromDB}
+                        updateInDB={props.updateInDB}
                         isActive={false}
                         isMonthData={true}
                         />)}

@@ -21,7 +21,7 @@ def index():
 def add_data(type_of_data):
     _json = request.json
     _name = _json['name']
-    _value = _json['value']
+    _value = int(_json['value'])
     _month = _json['month']
     _year = _json['year']
 
@@ -40,12 +40,12 @@ def fetch(type_of_data):
 
     _month = int(request.headers["month"])
     _year = int(request.headers["year"])
-    _typeOfData = request.headers["typeOfData"]
+    _type_of_data = request.headers["typeOfData"]
 
-    if _typeOfData == "expences" or _typeOfData  == "income":
+    if _type_of_data == "expences" or _type_of_data  == "income":
         data = mongo.db[type_of_data].find({"month": _month, "year": _year})
 
-    if _typeOfData == "mExpences" or _typeOfData  == "mIncome":
+    if _type_of_data == "mExpences" or _type_of_data  == "mIncome":
         data = mongo.db[type_of_data].find()
 
     response = dumps(data)
@@ -71,14 +71,21 @@ def delete(type_of_data):
 def update(type_of_data):
     _json = request.json
     _id = _json['id']
-    _name = _json['name']
-    _value = _json['value']
-    _month = int(_json["month"])
-    _year = int(_json["year"])
+    _new_data = {}
+    _new_data['name'] = _json['name']
+    _new_data['value'] = int(_json['value'])
+    
+    if type_of_data == "mExpences" or type_of_data  == "mIncome":
+        _new_data['month'] = _json['month']
+        _new_data['year'] = _json['year']
 
-    id = mongo.db[type_of_data].update_one({'_id': ObjectId(_id)}, {'$set': {'name': _name, 'value': _value}})
 
-    data = mongo.db[type_of_data].find({"month": _month, "year": _year})
+    id = mongo.db[type_of_data].update_one({'_id': ObjectId(_id)}, {'$set': _new_data})
+
+    if type_of_data == "expences" or type_of_data  == "income":
+        data = mongo.db[type_of_data].find({"month": _json['month'], "year": _json['year']})
+    if type_of_data == "mExpences" or type_of_data  == "mIncome":
+        data = mongo.db[type_of_data].find()
 
     response = dumps(data)
     return response  

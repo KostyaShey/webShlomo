@@ -5,8 +5,8 @@ export default function EditItem(props) {
     
     
     const [userInput, setUserInput] = useState({
-                                        inputTitle: props.item.name, 
-                                        inputValue: props.item.value,
+                                        name: props.item.name, 
+                                        value: props.item.value,
                                         month: props.item.month
                                     })
 
@@ -28,7 +28,7 @@ export default function EditItem(props) {
 
     const changeMonthArray = (array, newValue) => {
         if (array.includes(newValue)){
-            array = array.filter(item => item != newValue)
+            array = array.filter(item => item !== newValue)
         } else {
             array.push(newValue)
         }
@@ -53,10 +53,9 @@ export default function EditItem(props) {
 
     const handleSubmit = async (event) => {
         event.preventDefault(); // prevendDefault disables the devault requests on submit.
-        props.updateInDB({
-            id: props.item._id['$oid'], 
-            name: userInput.inputTitle, 
-            value: parseInt(userInput.inputValue)}, 
+        let data = userInput;
+        data.id = props.item._id['$oid']
+        props.updateInDB(data, 
             props.typeOfData);
         props.setEditMode()
     }
@@ -87,17 +86,17 @@ export default function EditItem(props) {
             <form onSubmit={handleSubmit}>
                 <div className="row noHover noBorderBottom">
                     <div className="leftBorder"></div>
-                    <div className="inputTitle">
+                    <div className="name">
                         <input type="text"
-                            name="inputTitle"
-                            value={userInput.inputTitle}
+                            name="name"
+                            value={userInput.name}
                             placeholder="Input Title"
                             onChange={handleChange} />
                     </div>
                     <div className="inputValue">
                         <input type="number"
-                            name="inputValue"
-                            value={userInput.inputValue}
+                            name="value"
+                            value={userInput.value}
                             placeholder="Input Value"
                             onChange={handleChange} />
                     </div>
@@ -121,15 +120,15 @@ export default function EditItem(props) {
                     <div className="leftBorder"></div>
                     <div className="inputTitle">
                         <input type="text"
-                            name="inputTitle"
-                            value={userInput.inputTitle}
+                            name="name"
+                            value={userInput.name}
                             placeholder="Input Title"
                             onChange={handleChange} />
                     </div>
                     <div className="inputValue">
                         <input type="number"
-                            name="inputValue"
-                            value={userInput.inputValue}
+                            name="value"
+                            value={userInput.value}
                             placeholder="Input Value"
                             onChange={handleChange} />
                     </div>
