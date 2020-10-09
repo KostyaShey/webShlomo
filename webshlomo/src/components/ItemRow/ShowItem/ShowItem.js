@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useRef} from 'react'
 import './ShowItem.css';
 
 export default function ShowItem(props) {
@@ -7,17 +7,18 @@ export default function ShowItem(props) {
         props.deleteFromDB(props.item._id['$oid'], props.typeOfData);
     }
 
-    let checkInactiveClass = "";
-    if (props.inactive) {
-        checkInactiveClass = "title inactive paddingleft"
+    const checkInactiveClass = useRef('')
+
+    if (!props.isActive) {
+        checkInactiveClass.current = "title inactive paddingleft"
     } else {
-        checkInactiveClass = "title paddingleft"
+        checkInactiveClass.current = "title paddingleft"
     }
 
     return (
         <div className="row item" >
             <div className="leftBorder"></div>
-            <div className={checkInactiveClass}>
+            <div className={checkInactiveClass.current}>
                 <p>{props.item.name}</p>
             </div>
             <div className="value">

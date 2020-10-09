@@ -24,7 +24,6 @@ export default function MDataSummary(props) {
     const splitData = (data) => {
         const active = data.filter(item => item.month.includes(props.date.selectedMonth + 1) && item.years.includes(props.date.selectedYear));
         const inactive = data.filter(item => !active.includes(item));
-        console.log('slit data complete')
         return [active, inactive]
     }
 
@@ -38,7 +37,6 @@ export default function MDataSummary(props) {
 
     useEffect(() => {
         [activeDataThisMonth.current, inactiveDataThisMonth.current] = splitData(props.data);
-        console.log(activeDataThisMonth.current)
         if (!didSplit){
             setdidSplit(true);
         }
@@ -53,22 +51,26 @@ export default function MDataSummary(props) {
                 setShowDetails={setShowDetails}
                 />}
             {showDetails && <TextRow 
-                        text={textForActive}/>}
+                        text={textForActive}
+                        isActive={true}/>}
             {showDetails && activeDataThisMonth.current.map(item => <ItemRow
                         item={item}
                         key={item._id['$oid']}
                         deleteFromDB={props.deleteFromDB}
+                        isMonthData={true}
+                        isActive={true}
                         />)}
             {showDetails && noData(activeDataThisMonth.current) && <NoData />}
             {showDetails && <TextRow 
                         text={textForInactive}
-                        inactive={true}
+                        isActive={false}
                         />}
             {showDetails && inactiveDataThisMonth.current.map(item => <ItemRow
                         item={item}
                         key={item._id['$oid']}
                         deleteFromDB={props.deleteFromDB}
-                        inactive={true}
+                        isActive={false}
+                        isMonthData={true}
                         />)}
             {showDetails && noData(inactiveDataThisMonth.current) && <NoData />}
         </div>

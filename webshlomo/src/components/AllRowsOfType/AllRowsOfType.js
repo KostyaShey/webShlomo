@@ -48,7 +48,8 @@ export default class AllRowsOfType extends Component {
                         deleteFromDB={this.props.deleteFromDB}
                         updateInDB={this.props.updateInDB}
                         date={this.props.date}
-                        key={item._id['$oid']} />)}
+                        key={item._id['$oid']}
+                        isActive={true} />)}
                     <SumRow data={this.props.data} />
                     {this.state.showAddRow && < AddRow
                         typeOfData={this.props.typeOfData}

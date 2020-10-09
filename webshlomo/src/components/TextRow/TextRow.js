@@ -1,18 +1,19 @@
-import React from 'react'
+import React, {useRef} from 'react'
 
 export default function TextRow(props) {
   
-    let checkInactiveClass = "";
-    if (props.inactive) {
-        checkInactiveClass = "title inactive"
+    const checkInactiveClass = useRef('')
+
+    if (!props.isActive) {
+        checkInactiveClass.current = "title inactive"
     } else {
-        checkInactiveClass = "title"
+        checkInactiveClass.current = "title"
     }
 
     return (
         <div className="row">
             <div className="leftBorder"></div>
-            <div className={checkInactiveClass}>
+            <div className={checkInactiveClass.current}>
                 <p>{props.text}</p>
             </div>
             <div className="value"></div>

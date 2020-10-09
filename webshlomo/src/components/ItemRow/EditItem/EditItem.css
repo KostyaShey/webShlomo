@@ -1,0 +1,19 @@
+.noBorderBottom {
+    border-bottom: none;
+}
+
+.lables {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-column: 2 / 4;
+    text-align: center;
+    padding: 0.7em 0.5em;
+}
+
+label {
+
+}
+
+input[type="checkbox"] {
+
+}

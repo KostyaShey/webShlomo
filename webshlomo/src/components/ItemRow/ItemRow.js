@@ -14,7 +14,9 @@ export default function ItemRow(props) {
                 item={props.item}
                 typeOfData={props.typeOfData}
                 updateInDB={props.updateInDB}
-                date={props.date}/>
+                date={props.date}
+                isMonthData={props.isMonthData}
+                />
         )
     } else {
         return (
@@ -24,7 +26,7 @@ export default function ItemRow(props) {
                 typeOfData={props.typeOfData}
                 deleteFromDB={props.deleteFromDB}
                 date={props.date}
-                inactive={props.inactive}
+                isActive={props.isActive}
                 />
         )
     }
