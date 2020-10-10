@@ -10,15 +10,15 @@ export default function ShowItem(props) {
     const checkInactiveClass = useRef('')
 
     if (!props.isActive) {
-        checkInactiveClass.current = "title inactive paddingleft"
+        checkInactiveClass.current = "row item inactive"
     } else {
-        checkInactiveClass.current = "title paddingleft"
+        checkInactiveClass.current = "row item"
     }
 
     return (
-        <div className="row item" >
+        <div className={checkInactiveClass.current} >
             <div className="leftBorder"></div>
-            <div className={checkInactiveClass.current}>
+            <div className="title paddingleft">
                 <p>{props.item.name}</p>
             </div>
             <div className="value">

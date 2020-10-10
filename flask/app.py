@@ -71,10 +71,10 @@ def delete(type_of_data):
 def update(type_of_data):
     _json = request.json
     _id = _json['id']
+    
     _new_data = {}
     _new_data['name'] = _json['name']
     _new_data['value'] = int(_json['value'])
-    
     if type_of_data == "mExpences" or type_of_data  == "mIncome":
         _new_data['month'] = _json['month']
         _new_data['year'] = _json['year']

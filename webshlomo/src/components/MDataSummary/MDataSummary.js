@@ -22,7 +22,7 @@ export default function MDataSummary(props) {
     const inactiveDataThisMonth = useRef([])
 
     const splitData = (data) => {
-        const active = data.filter(item => item.month.includes(props.date.selectedMonth + 1) && item.years.includes(props.date.selectedYear));
+        const active = data.filter(item => item.month.includes(props.date.selectedMonth + 1) && item.year.includes(props.date.selectedYear));
         const inactive = data.filter(item => !active.includes(item));
         return [active, inactive]
     }
@@ -40,8 +40,8 @@ export default function MDataSummary(props) {
         if (!didSplit){
             setdidSplit(true);
         }
-        
-    }, [props.date.selectedMonth])
+        console.log('hello!')
+    }, [props.data])
 
     return (
         <div>
@@ -55,7 +55,7 @@ export default function MDataSummary(props) {
                         isActive={true}/>}
             {showDetails && activeDataThisMonth.current.map(item => <ItemRow
                         item={item}
-                        typeOfData={"mExpences"}
+                        typeOfData={props.typeOfData}
                         key={item._id['$oid']}
                         deleteFromDB={props.deleteFromDB}
                         updateInDB={props.updateInDB}
@@ -69,7 +69,7 @@ export default function MDataSummary(props) {
                         />}
             {showDetails && inactiveDataThisMonth.current.map(item => <ItemRow
                         item={item}
-                        typeOfData={"mIncome"}
+                        typeOfData={props.typeOfData}
                         key={item._id['$oid']}
                         deleteFromDB={props.deleteFromDB}
                         updateInDB={props.updateInDB}
