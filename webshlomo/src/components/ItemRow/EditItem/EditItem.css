@@ -2,7 +2,7 @@
     border-bottom: none;
 }
 
-.lables {
+.labels {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-column: 2 / 4;
@@ -10,10 +10,16 @@
     padding: 0.7em 0.5em;
 }
 
-label {
-
+.selects {
+    grid-template-columns: repeat(2, 1fr);
+    grid-column: 2 / 4;
+    padding: 1em 1em;
 }
 
-input[type="checkbox"] {
+select {
+    height: 3em;
+}
 
+.selects label {
+    padding: 0em 1em;
 }

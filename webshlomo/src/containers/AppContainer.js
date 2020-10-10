@@ -87,8 +87,6 @@ export default class AppContainer extends React.Component {
         if (typeOfData === 'expences' || typeOfData === 'income'){
             updatedData.month = this.state.date.selectedMonth + 1; // + 1 because js getdate returns month as digits starting with 0
             updatedData.year = this.state.date.selectedYear;   
-        } else {
-            updatedData.year = [2020,2021]   // remove this later after adding years to FE
         }
         
         fetch(`/update/${typeOfData}`, {
