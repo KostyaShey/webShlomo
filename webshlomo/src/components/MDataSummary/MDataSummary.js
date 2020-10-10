@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import SumMonthData from '../SumMonthData/SumMonthData'
 import ItemRow from '../ItemRow/ItemRow'
 import TextRow from '../TextRow/TextRow'
@@ -17,14 +17,14 @@ export default function MDataSummary(props) {
 
     const [showDetails, setShowDetails] = useState(false)
     const [didSplit, setdidSplit] = useState(false)
+    const [splitData, setSplitData] = useState([])
 
-    const activeDataThisMonth = useRef([])
-    const inactiveDataThisMonth = useRef([])
 
-    const splitData = (data) => {
-        const active = data.filter(item => item.month.includes(props.date.selectedMonth + 1) && item.year.includes(props.date.selectedYear));
-        const inactive = data.filter(item => !active.includes(item));
-        return [active, inactive]
+    const splitDataFunction = (data) => {
+        const newData = {}
+        newData.active = data.filter(item => item.month.includes(props.date.selectedMonth + 1) && item.year.includes(props.date.selectedYear));
+        newData.inactive = data.filter(item => !newData.active.includes(item));
+        return newData
     }
 
     const noData = (array) => {
@@ -36,24 +36,26 @@ export default function MDataSummary(props) {
     }
 
     useEffect(() => {
-        [activeDataThisMonth.current, inactiveDataThisMonth.current] = splitData(props.data);
+        const slitDataForState = splitDataFunction(props.data)
+        console.log(slitDataForState)
+        setSplitData(slitDataForState);
         if (!didSplit){
             setdidSplit(true);
         }
-        console.log('hello!')
+        
     }, [props.data])
 
     return (
         <div>
             {didSplit && <SumMonthData 
-                data={activeDataThisMonth.current} 
+                data={splitData.active} 
                 typeOfData={props.typeOfData}
                 setShowDetails={setShowDetails}
                 />}
             {showDetails && <TextRow 
                         text={textForActive}
                         isActive={true}/>}
-            {showDetails && activeDataThisMonth.current.map(item => <ItemRow
+            {showDetails && splitData.active.map(item => <ItemRow
                         item={item}
                         typeOfData={props.typeOfData}
                         key={item._id['$oid']}
@@ -62,12 +64,12 @@ export default function MDataSummary(props) {
                         isMonthData={true}
                         isActive={true}
                         />)}
-            {showDetails && noData(activeDataThisMonth.current) && <NoData />}
+            {showDetails && noData(splitData.active) && <NoData />}
             {showDetails && <TextRow 
                         text={textForInactive}
                         isActive={false}
                         />}
-            {showDetails && inactiveDataThisMonth.current.map(item => <ItemRow
+            {showDetails && splitData.inactive.map(item => <ItemRow
                         item={item}
                         typeOfData={props.typeOfData}
                         key={item._id['$oid']}
@@ -76,7 +78,7 @@ export default function MDataSummary(props) {
                         isActive={false}
                         isMonthData={true}
                         />)}
-            {showDetails && noData(inactiveDataThisMonth.current) && <NoData />}
+            {showDetails && noData(splitData.inactive) && <NoData />}
         </div>
     )
 }
