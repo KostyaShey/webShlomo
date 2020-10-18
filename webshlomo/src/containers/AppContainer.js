@@ -38,7 +38,7 @@ export default class AppContainer extends React.Component {
     }
 
     readAllCollectionsFromDB(month, year) {
-        const collections = ['income', 'expences', 'mExpences', 'mIncome']
+        const collections = ['income', 'expences', 'mExpenses', 'mIncome']
         for(var i=0; i<collections.length; i++){
             this.readFromDB(collections[i], month, year)
         } 
@@ -81,23 +81,20 @@ export default class AppContainer extends React.Component {
         .then(response => this.setState({[typeOfData]: response}))
     }
 
-    updateInDB (updatedData, key, typeOfData) {
+    updateInDB (updatedData, typeOfData) {
         
-        var month = this.state.date.selectedMonth + 1; // + 1 because js getdate returns month as digits starting with 0
-        var year = this.state.date.selectedYear;   
+        //fix the edititem component! remove this shit condition
+        if (typeOfData === 'expences' || typeOfData === 'income'){
+            updatedData.month = this.state.date.selectedMonth + 1; // + 1 because js getdate returns month as digits starting with 0
+            updatedData.year = this.state.date.selectedYear;   
+        }
         
         fetch(`/update/${typeOfData}`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json',
             },
-            body: JSON.stringify({
-                "id": key,
-                "name": updatedData.name,
-                "value": updatedData.value,
-                "month": month,
-                "year": year
-            })
+            body: JSON.stringify(updatedData)
         })
         .then(response => response.json())
         .then(response => this.setState({[typeOfData]: response}))
@@ -128,7 +125,7 @@ export default class AppContainer extends React.Component {
     async componentDidMount() {
         var data = {};
 
-        const collections = ['income', 'expences', 'mExpences', 'mIncome']
+        const collections = ['income', 'expences', 'mExpenses', 'mIncome']
         for(var i=0; i<collections.length; i++){
             data[collections[i]] = await fetch(`/fetch/${collections[i]}`,{
                 method: 'GET',

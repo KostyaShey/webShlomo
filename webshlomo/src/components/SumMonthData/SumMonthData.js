@@ -4,8 +4,8 @@ import './SumMonthData.css';
 export default function SumMonthData(props) {
 
     const titles = {
-        'mExpences': 'per month expences',
-        'mIncome': 'per month income'
+        'mExpenses': 'expenses',
+        'mIncome': 'income'
       }
 
     const valueSum = props.data.reduce((currentSum, array) => currentSum + array.value, 0);
@@ -14,7 +14,7 @@ export default function SumMonthData(props) {
         <div className="row">
             <div className="leftBorder"></div>
             <div className="title bold">
-                <p>Sum of {titles[props.typeOfData]}</p>
+                <p>Total monthly {titles[props.typeOfData]}</p>
             </div>
             <div className="value bold">
                 <p className='numbersAlign'>{valueSum} €</p>
