@@ -16,7 +16,6 @@ export default function MDataSummaryContainer(props) {
     
     useEffect(() => {
         const slitDataForState = splitDataFunction(props.data)
-        console.log(slitDataForState)
         setSplitData(slitDataForState);
         if (!didSplit){
             setdidSplit(true);

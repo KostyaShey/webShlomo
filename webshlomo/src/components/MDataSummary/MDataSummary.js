@@ -8,7 +8,7 @@ import './MDataSummary.css';
 export default function MDataSummary(props) {
 
     const titles = {
-        'mExpences': 'Monthly expences',
+        'mExpenses': 'Monthly expenses',
         'mIncome': 'Monthly income'
       }
 

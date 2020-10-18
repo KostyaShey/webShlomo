@@ -45,7 +45,7 @@ def fetch(type_of_data):
     if _type_of_data == "expences" or _type_of_data  == "income":
         data = mongo.db[type_of_data].find({"month": _month, "year": _year})
 
-    if _type_of_data == "mExpences" or _type_of_data  == "mIncome":
+    if _type_of_data == "mExpenses" or _type_of_data  == "mIncome":
         data = mongo.db[type_of_data].find()
 
     response = dumps(data)
@@ -75,7 +75,7 @@ def update(type_of_data):
     _new_data = {}
     _new_data['name'] = _json['name']
     _new_data['value'] = int(_json['value'])
-    if type_of_data == "mExpences" or type_of_data  == "mIncome":
+    if type_of_data == "mExpenses" or type_of_data  == "mIncome":
         _new_data['month'] = _json['month']
         _new_data['yearArray'] = _json['yearArray']
 
@@ -83,7 +83,7 @@ def update(type_of_data):
 
     if type_of_data == "expences" or type_of_data  == "income":
         data = mongo.db[type_of_data].find({"month": _json['month'], "year": _json['year']})
-    if type_of_data == "mExpences" or type_of_data  == "mIncome":
+    if type_of_data == "mExpenses" or type_of_data  == "mIncome":
         data = mongo.db[type_of_data].find()
 
     response = dumps(data)

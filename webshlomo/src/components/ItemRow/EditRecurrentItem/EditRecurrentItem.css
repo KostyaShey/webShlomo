@@ -1,0 +1,26 @@
+.noBorderBottom {
+    border-bottom: none;
+}
+
+.labels {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(6em, 1fr));
+    grid-column: 2 / 5;
+    text-align: center;
+    padding: 0.7em 0.5em;
+}
+
+.selects {
+    grid-template-columns: repeat(2, 1fr);
+    grid-column: 2 / 5;
+    padding: 1em 1em;
+    text-align: center;
+}
+
+select {
+    height: 3em;
+}
+
+.selects label {
+    padding: 0em 1em;
+}

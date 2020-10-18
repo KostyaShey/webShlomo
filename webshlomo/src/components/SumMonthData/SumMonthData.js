@@ -4,7 +4,7 @@ import './SumMonthData.css';
 export default function SumMonthData(props) {
 
     const titles = {
-        'mExpences': 'expences',
+        'mExpenses': 'expenses',
         'mIncome': 'income'
       }
 

@@ -6,7 +6,7 @@ export default function AddRow(props) {
   const titles = {
     'expences': 'expences',
     'income': 'income',
-    'mExpences': 'per month expences',
+    'mExpenses': 'per month expences',
     'mIncome': 'per month income'
   }
   

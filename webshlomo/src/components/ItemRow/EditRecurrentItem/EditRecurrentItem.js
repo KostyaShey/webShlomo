@@ -82,11 +82,12 @@ export default function EditRecurrentItem(props) {
 
     const createCheckBox = (month) => {
         return (
-            <label>
+            <label key={month.label}>
                 <input
                     type="checkbox"
                     name={month.label}
                     checked={userInput.month.includes(month.label)}
+                    
                     onChange={handleChange}
                 />
                 {month.name}
@@ -98,7 +99,7 @@ export default function EditRecurrentItem(props) {
             <form onSubmit={handleSubmit}>
                 <div className="row noHover noBorderBottom">
                     <div className="leftBorder"></div>
-                    <div className="name">
+                    <div className="inputTitle">
                         <input type="text"
                             name="name"
                             value={userInput.name}
@@ -126,13 +127,13 @@ export default function EditRecurrentItem(props) {
                 <div className="row noHower">
                     <div className="leftBorder"></div>
                         <div className="selects">
-                            <label for="startYear">Starting year:</label>
+                            <label htmlFor="startYear">Starting year:</label>
                             <select id="startYear" name="startYear" defaultValue={selectedYears.current.startYear} onChange={handleChange}>
-                                {yearsArray.map(year => <option value={year} >{year}</option>)}
+                                {yearsArray.map(year => <option value={year} key={year}>{year}</option>)}
                             </select>
-                            <label for="endYear">End year:</label>
+                            <label htmlFor="endYear">End year:</label>
                             <select id="endYear" name="endYear" defaultValue={selectedYears.current.endYear} onChange={handleChange}>
-                                {yearsArray.map(year => <option value={year} >{year}</option>)}
+                                {yearsArray.map(year => <option value={year} key={year}>{year}</option>)}
                             </select>
                         </div>
                     </div>

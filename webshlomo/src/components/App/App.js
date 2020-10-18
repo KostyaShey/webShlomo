@@ -36,8 +36,8 @@ export default class App extends Component {
             </div>
             <div className="monthTable">
                 {!this.props.data.loading && <MDataSummaryContainer
-                        typeOfData={"mExpences"}
-                        data={this.props.data.mExpences}
+                        typeOfData={"mExpenses"}
+                        data={this.props.data.mExpenses}
                         updateInDB={this.props.updateInDB}
                         deleteFromDB={this.props.deleteFromDB}
                         

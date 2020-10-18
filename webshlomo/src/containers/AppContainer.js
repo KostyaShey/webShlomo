@@ -38,7 +38,7 @@ export default class AppContainer extends React.Component {
     }
 
     readAllCollectionsFromDB(month, year) {
-        const collections = ['income', 'expences', 'mExpences', 'mIncome']
+        const collections = ['income', 'expences', 'mExpenses', 'mIncome']
         for(var i=0; i<collections.length; i++){
             this.readFromDB(collections[i], month, year)
         } 
@@ -125,7 +125,7 @@ export default class AppContainer extends React.Component {
     async componentDidMount() {
         var data = {};
 
-        const collections = ['income', 'expences', 'mExpences', 'mIncome']
+        const collections = ['income', 'expences', 'mExpenses', 'mIncome']
         for(var i=0; i<collections.length; i++){
             data[collections[i]] = await fetch(`/fetch/${collections[i]}`,{
                 method: 'GET',

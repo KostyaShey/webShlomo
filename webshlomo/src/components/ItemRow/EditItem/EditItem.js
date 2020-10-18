@@ -37,7 +37,7 @@ export default function EditItem(props) {
             <form onSubmit={handleSubmit}>
                 <div className="row noHover noBorderBottom">
                     <div className="leftBorder"></div>
-                    <div className="name">
+                    <div className="inputTitle">
                         <input type="text"
                             name="name"
                             value={userInput.name}
