@@ -44,18 +44,13 @@ export default class AppContainer extends React.Component {
         } 
     }
 
-    writeToDB(data, typeOfData, month, year) {
+    writeToDB(newData, typeOfData) {
         fetch(`/add/${typeOfData}`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json',
             },
-            body: JSON.stringify({
-                "name": data.name,
-                "value": data.value,
-                "month": month + 1, // + 1 because js getdate returns month as digits starting with 0
-                "year": year
-            })
+            body: JSON.stringify(newData)
         })
         .then(response => response.json())
         .then(response => this.setState({[typeOfData]: response}))

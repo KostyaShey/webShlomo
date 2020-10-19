@@ -40,7 +40,7 @@ export default class App extends Component {
                         data={this.props.data.mExpenses}
                         updateInDB={this.props.updateInDB}
                         deleteFromDB={this.props.deleteFromDB}
-                        
+                        writeToDB={this.props.writeToDB}
                         date={this.props.data.date}
                         />}
                 {!this.props.data.loading && <MDataSummaryContainer
@@ -48,7 +48,7 @@ export default class App extends Component {
                         data={this.props.data.mIncome}
                         updateInDB={this.props.updateInDB}
                         deleteFromDB={this.props.deleteFromDB}
-                        
+                        writeToDB={this.props.writeToDB}
                         date={this.props.data.date}
                         />}
             </div>

@@ -41,6 +41,7 @@ export default function MDataSummaryContainer(props) {
                 deleteFromDB={props.deleteFromDB}
                 arrayIsEmpty={arrayIsEmpty}
                 date={props.data.date}
+                writeToDB={props.writeToDB}
                 />
             }
         </div>

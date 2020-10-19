@@ -3,6 +3,8 @@ import SumMonthData from '../SumMonthData/SumMonthData'
 import ItemRow from '../ItemRow/ItemRow'
 import TextRow from '../TextRow/TextRow'
 import NoData from '../NoData/NoData'
+import InputRowRecurrent from '../InputRowRecurrent/InputRowRecurrent'
+import AddRow from '../AddRow/AddRow'
 import './MDataSummary.css';
 
 export default function MDataSummary(props) {
@@ -16,6 +18,8 @@ export default function MDataSummary(props) {
     const textForInactive = `${titles[props.typeOfData]} in other month`
 
     const [showDetails, setShowDetails] = useState(false)
+
+    const [showInputRow, setShowInputRow] = useState(false)
 
     return (
         <div>
@@ -51,6 +55,18 @@ export default function MDataSummary(props) {
                         isMonthData={true}
                         />)}
             {showDetails && props.arrayIsEmpty(props.data.inactive) && <NoData />}
+            {showDetails && !showInputRow && <AddRow 
+                                typeOfData={props.typeOfData}
+                                setShowInputRow={setShowInputRow}
+                                showInputRow={showInputRow}
+                                />}
+            {showDetails && showInputRow && <InputRowRecurrent 
+                                setShowInputRow={setShowInputRow}
+                                showInputRow={showInputRow}
+                                writeToDB={props.writeToDB}
+                                date={props.date}
+                                typeOfData={props.typeOfData}
+                                />}
         </div>
     )
 }

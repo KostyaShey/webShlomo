@@ -29,7 +29,11 @@ def add_data(type_of_data):
         id = mongo.db[type_of_data].insert(
             {'name': _name, 'value': _value, 'month': _month, 'year': _year})
 
-    data = mongo.db[type_of_data].find({"month": _month, "year": _year})
+    if type_of_data == "expences" or type_of_data  == "income":
+        data = mongo.db[type_of_data].find({"month": _month, "year": _year})
+
+    if type_of_data == "mExpenses" or type_of_data  == "mIncome":
+        data = mongo.db[type_of_data].find()
 
     response = dumps(data)
     return response  
