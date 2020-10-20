@@ -9,7 +9,7 @@ export default function MDataSummaryContainer(props) {
 
     const splitDataFunction = (data) => {
         const newData = {}
-        newData.active = data.filter(item => item.month.includes(props.date.selectedMonth + 1) && item.yearArray.includes(props.date.selectedYear));
+        newData.active = data.filter(item => item.month.includes(props.date.selectedMonth + 1) && item.year.includes(props.date.selectedYear));
         newData.inactive = data.filter(item => !newData.active.includes(item));
         return newData
     }

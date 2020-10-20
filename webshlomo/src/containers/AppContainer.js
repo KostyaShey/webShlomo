@@ -77,13 +77,7 @@ export default class AppContainer extends React.Component {
     }
 
     updateInDB (updatedData, typeOfData) {
-        
-        //fix the edititem component! remove this shit condition
-        if (typeOfData === 'expences' || typeOfData === 'income'){
-            updatedData.month = this.state.date.selectedMonth + 1; // + 1 because js getdate returns month as digits starting with 0
-            updatedData.year = this.state.date.selectedYear;   
-        }
-        
+              
         fetch(`/update/${typeOfData}`, {
             method: 'POST',
             headers: {
