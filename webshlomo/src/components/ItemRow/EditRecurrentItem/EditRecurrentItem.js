@@ -8,7 +8,7 @@ export default function EditRecurrentItem(props) {
                                         name: props.item.name, 
                                         value: props.item.value,
                                         month: props.item.month,
-                                        yearArray: props.item.yearArray
+                                        year: props.item.year
                                     })
 
     const monthArray = [
@@ -30,8 +30,8 @@ export default function EditRecurrentItem(props) {
     const yearsArray = Array.from({length: END-START}, (x, i) => i+START)
 
     const selectedYears = useRef({
-        endYear: Math.max(...userInput.yearArray),
-        startYear: Math.min(...userInput.yearArray)
+        endYear: Math.max(...userInput.year),
+        startYear: Math.min(...userInput.year)
     })                     
 
     const changeMonthArray = (array, newValue) => {
