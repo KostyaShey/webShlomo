@@ -79,9 +79,8 @@ def update(type_of_data):
     _new_data = {}
     _new_data['name'] = _json['name']
     _new_data['value'] = int(_json['value'])
-    if type_of_data == "mExpenses" or type_of_data  == "mIncome":
-        _new_data['month'] = _json['month']
-        _new_data['yearArray'] = _json['yearArray']
+    _new_data['month'] = _json['month']
+    _new_data['year'] = _json['year']
 
     id = mongo.db[type_of_data].update_one({'_id': ObjectId(_id)}, {'$set': _new_data})
 

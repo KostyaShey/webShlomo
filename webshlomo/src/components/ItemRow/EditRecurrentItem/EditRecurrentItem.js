@@ -34,6 +34,18 @@ export default function EditRecurrentItem(props) {
         startYear: Math.min(...userInput.year)
     })                     
 
+    const validationWarning = useRef("")
+
+    const validateYears = (name, value) => {
+        if (name === 'startYear' && value > selectedYears.current.endYear){
+            return 'validationFailed'
+        } else if (name === 'endYear' && value < selectedYears.current.startYear){
+            return 'validationFailed'
+        } else {
+            return ""
+        }
+    }
+
     const changeMonthArray = (array, newValue) => {
         if (array.includes(newValue)){
             array = array.filter(item => item !== newValue)
@@ -48,7 +60,12 @@ export default function EditRecurrentItem(props) {
         
         switch (type) {
             case "select-one":
-                selectedYears.current[name] = value;
+                validationWarning.current = validateYears(name, value);
+                selectedYears.current[name] = parseInt(value);
+                setUserInput((prev) => ({
+                    ...prev,
+                    year: Array.from({length: selectedYears.current.endYear-selectedYears.current.startYear+1}, (x, i) => i+selectedYears.current.startYear)
+                  }));  
                 break;
             case "checkbox":
                 const newMonthArray = changeMonthArray(userInput.month, parseInt(name))
@@ -69,7 +86,6 @@ export default function EditRecurrentItem(props) {
         event.preventDefault(); // prevendDefault disables the devault requests on submit.
         let data = userInput;
         data.id = props.item._id['$oid']
-        data.yearArray = Array.from({length: selectedYears.current.endYear-selectedYears.current.startYear+1}, (x, i) => i+selectedYears.current.startYear)
         props.updateInDB(data, 
             props.typeOfData);
         props.setEditMode()
@@ -114,7 +130,7 @@ export default function EditRecurrentItem(props) {
                     </div>
                     <div className="inputButtons">
                         <button type="button" onClick={handleClickEditMode}>&#xf05e;</button>
-                        <button type="submit">&#xf00c;</button>
+                        <button type="submit" disabled={validationWarning.current}>&#xf00c;</button>
                     </div>
                 </div>
                 <div className="row noHower noBorderBottom">
