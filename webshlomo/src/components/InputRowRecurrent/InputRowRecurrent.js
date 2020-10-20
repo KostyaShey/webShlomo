@@ -1,16 +1,8 @@
 import React, { useState, useRef } from 'react'
-import './EditRecurrentItem.css';
+import './InputRowRecurrent.css'
 
-export default function EditRecurrentItem(props) {
+export default function InputRowRecurrent(props) {
     
-    
-    const [userInput, setUserInput] = useState({
-                                        name: props.item.name, 
-                                        value: props.item.value,
-                                        month: props.item.month,
-                                        yearArray: props.item.yearArray
-                                    })
-
     const monthArray = [
         {name: 'January', label: 1},
         {name: 'February', label: 2},
@@ -26,13 +18,12 @@ export default function EditRecurrentItem(props) {
         {name: 'December', label: 12}
     ];
 
+    const selectedMonth = useRef([])
+
     const START=2020, END=2036;
     const yearsArray = Array.from({length: END-START}, (x, i) => i+START)
-
-    const selectedYears = useRef({
-        endYear: Math.max(...userInput.yearArray),
-        startYear: Math.min(...userInput.yearArray)
-    })                     
+    
+    const [userInput, setUserInput] = useState({startYear: 2020, endYear: 2020})
 
     const changeMonthArray = (array, newValue) => {
         if (array.includes(newValue)){
@@ -43,15 +34,34 @@ export default function EditRecurrentItem(props) {
         return array
     }
 
+    const createCheckBox = (month) => {
+        return (
+            <label key={month.label}>
+                <input
+                    type="checkbox"
+                    name={month.label}
+                    onChange={handleChange}
+                    checked={selectedMonth.current.includes(month.label)}
+                />
+                {month.name}
+            </label>
+        )
+    }
+    
     const handleChange = ({ target }) => {
         const { name, value, type } = target;
         
         switch (type) {
             case "select-one":
-                selectedYears.current[name] = value;
+                console.log(name)
+                console.log(value)
+                setUserInput((prev) => ({
+                    ...prev,
+                    [name]: value
+                  }));              
                 break;
             case "checkbox":
-                const newMonthArray = changeMonthArray(userInput.month, parseInt(name))
+                const newMonthArray = changeMonthArray(selectedMonth.current, parseInt(name))
                 setUserInput((prev) => ({
                     ...prev,
                     month: newMonthArray
@@ -67,54 +77,40 @@ export default function EditRecurrentItem(props) {
 
     const handleSubmit = async (event) => {
         event.preventDefault(); // prevendDefault disables the devault requests on submit.
-        let data = userInput;
-        data.id = props.item._id['$oid']
-        data.yearArray = Array.from({length: selectedYears.current.endYear-selectedYears.current.startYear+1}, (x, i) => i+selectedYears.current.startYear)
-        props.updateInDB(data, 
-            props.typeOfData);
-        props.setEditMode()
+        const userYearArray = Array.from({length: userInput.endYear-userInput.startYear+1}, (x, i) => i+userInput.startYear);
+        const newData = {
+            name: userInput.inputTitle,
+            value: parseInt(userInput.inputValue),
+            month: selectedMonth.current,
+            year: userYearArray
+        }
+        props.writeToDB(newData, props.typeOfData);
+        setUserInput({inputTitle:'', inputValue:''});
+        selectedMonth.current = [];
+        props.setShowInputRow(!props.showInputRow);
     }
-
-    const handleClickEditMode = (event) => {
-        event.preventDefault(); // prevendDefault disables the devault requests on submit.
-        props.setEditMode()
-    }
-
-    const createCheckBox = (month) => {
-        return (
-            <label key={month.label}>
-                <input
-                    type="checkbox"
-                    name={month.label}
-                    checked={userInput.month.includes(month.label)}
-                    onChange={handleChange}
-                />
-                {month.name}
-            </label>
-        )
-    }
- 
-        return (
-            <form onSubmit={handleSubmit}>
+    
+    return (
+        <form onSubmit={handleSubmit}>
                 <div className="row noHover noBorderBottom">
                     <div className="leftBorder"></div>
                     <div className="inputTitle">
                         <input type="text"
-                            name="name"
-                            value={userInput.name}
+                            name="inputTitle"
+                            value={userInput.inputTitle}
                             placeholder="Input Title"
                             onChange={handleChange} />
                     </div>
                     <div className="inputValue">
                         <input type="number"
-                            name="value"
-                            value={userInput.value}
+                            name="inputValue"
+                            value={userInput.inputValue}
                             placeholder="Input Value"
                             onChange={handleChange} />
                     </div>
-                    <div className="inputButtons">
-                        <button type="button" onClick={handleClickEditMode}>&#xf05e;</button>
+                    <div className="inputButtons inputButtons">
                         <button type="submit">&#xf00c;</button>
+                        <button type="button" onClick={() => props.setShowInputRow(!props.showInputRow)}>&#xf05e;</button>
                     </div>
                 </div>
                 <div className="row noHower noBorderBottom">
@@ -127,17 +123,15 @@ export default function EditRecurrentItem(props) {
                     <div className="leftBorder"></div>
                         <div className="selects">
                             <label htmlFor="startYear">Starting year:</label>
-                            <select id="startYear" name="startYear" defaultValue={selectedYears.current.startYear} onChange={handleChange}>
+                            <select id="startYear" name="startYear" onChange={handleChange}>
                                 {yearsArray.map(year => <option value={year} key={year}>{year}</option>)}
                             </select>
                             <label htmlFor="endYear">End year:</label>
-                            <select id="endYear" name="endYear" defaultValue={selectedYears.current.endYear} onChange={handleChange}>
+                            <select id="endYear" name="endYear" onChange={handleChange}>
                                 {yearsArray.map(year => <option value={year} key={year}>{year}</option>)}
                             </select>
                         </div>
                     </div>
-            </form>
-        )
-  
-
+        </form>
+    )
 }

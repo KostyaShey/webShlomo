@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import AddRow from '../AddRow/AddRow'
 import SumRow from '../SumRow/SumRow'
 import TitleRow from '../TitleRow/TitleRow'
@@ -7,60 +7,52 @@ import InputRow from '../InputRow/InputRow'
 import ItemRow from '../ItemRow/ItemRow'
 import NoData from '../NoData/NoData'
 
-export default class AllRowsOfType extends Component {
+export default function AllRowsOfType(props) {
 
-    constructor(props) {
-        super(props)
+    const [showInputRow, setShowInputRow] = useState(false)
 
-        this.state = {
-            showAddRow: true,
-            showInputRow: false,
-        }
-        this.changeVisibility = this.changeVisibility.bind(this);
-    }
-
-    changeVisibility() {
-
-        this.setState({ showInputRow: !this.state.showInputRow })
-        this.setState({ showAddRow: !this.state.showAddRow })
-
-    }
-
-    render() {
-        if (this.props.data.length === 0) {
-            return (
+    if (props.data.length === 0){
+        return (
+            <div>
                 <div>
-                    <TitleRow name={this.props.typeOfData} />
+                    <TitleRow name={props.typeOfData} />
                     <NoData 
-                        typeOfData={this.props.typeOfData}
-                        writeToDB={this.props.writeToDB}
-                        date={this.props.date}
+                        typeOfData={props.typeOfData}
+                        writeToDB={props.writeToDB}
+                        date={props.date}
                         />
                 </div>
-            )
-        } else {
-            return (
+            </div>
+        )
+    } else {
+        return (
                 <div>
-                    <TitleRow name={this.props.typeOfData} />
-                    {this.props.data.map(item => <ItemRow
+                    <TitleRow name={props.typeOfData} />
+                    {props.data.map(item => <ItemRow
                         item={item}
-                        typeOfData={this.props.typeOfData}
-                        deleteFromDB={this.props.deleteFromDB}
-                        updateInDB={this.props.updateInDB}
-                        date={this.props.date}
+                        typeOfData={props.typeOfData}
+                        deleteFromDB={props.deleteFromDB}
+                        updateInDB={props.updateInDB}
+                        date={props.date}
                         key={item._id['$oid']}
-                        isActive={true} />)}
-                    <SumRow data={this.props.data} />
-                    {this.state.showAddRow && < AddRow
-                        typeOfData={this.props.typeOfData}
-                        changeVisibility={this.changeVisibility} />}
-                    {this.state.showInputRow && <InputRow
-                        changeVisibility={this.changeVisibility}
-                        writeToDB={this.props.writeToDB}
-                        date={this.props.date}
-                        typeOfData={this.props.typeOfData}/>}
+                        isActive={true} 
+                        />)}
+                    <SumRow data={props.data} />
+                    {!showInputRow && < AddRow
+                        setShowInputRow={setShowInputRow}
+                        showInputRow={showInputRow}
+                        typeOfData={props.typeOfData}
+                        />}
+                    {showInputRow && <InputRow
+                        setShowInputRow={setShowInputRow}
+                        showInputRow={showInputRow}
+                        writeToDB={props.writeToDB}
+                        date={props.date}
+                        typeOfData={props.typeOfData}
+                        />}
                 </div>
-            )
-        }
+                )
     }
+
+    
 }

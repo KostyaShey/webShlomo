@@ -16,9 +16,16 @@ export default function InputRow(props) {
 
     const handleSubmit = async (event) => {
         event.preventDefault(); // prevendDefault disables the devault requests on submit.
-        props.writeToDB({name: userInput.inputTitle, value: parseInt(userInput.inputValue)}, props.typeOfData, props.date.selectedMonth, props.date.selectedYear);
+        const newData = {
+            name: userInput.inputTitle,
+            value: parseInt(userInput.inputValue),
+            month: props.date.selectedMonth +1,
+            year: props.date.selectedYear
+        }
+        props.writeToDB(newData, props.typeOfData);
         setUserInput({inputTitle:'', inputValue:''})
     }
+
     
     return (
         <form onSubmit={handleSubmit}>
@@ -40,7 +47,7 @@ export default function InputRow(props) {
                     </div>
                     <div className="inputButtons inputButtons">
                         <button type="submit">&#xf00c;</button>
-                        <button type="button" onClick={props.changeVisibility}>&#xf05e;</button>
+                        <button type="button" onClick={() => props.setShowInputRow(!props.showInputRow)}>&#xf05e;</button>
                     </div>
                 </div>
         </form>

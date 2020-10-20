@@ -18,18 +18,19 @@ export default function EditItem(props) {
                   }));
         }   
 
-
     const handleSubmit = async (event) => {
-        event.preventDefault(); // prevendDefault disables the devault requests on submit.
+        event.preventDefault(); // preventDefault disables the default requests on submit.
         let data = userInput;
-        data.id = props.item._id['$oid']
+        data.id = props.item._id['$oid'];
+        data.month = props.date.selectedMonth +1;
+        data.year = props.date.selectedYear;
         props.updateInDB(data, 
             props.typeOfData);
         props.setEditMode()
     }
 
     const handleClickEditMode = (event) => {
-        event.preventDefault(); // prevendDefault disables the devault requests on submit.
+        event.preventDefault(); // preventDefault disables the default requests on submit.
         props.setEditMode()
     }
  
