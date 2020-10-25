@@ -4,9 +4,9 @@ import './AddRow.css'
 export default function AddRow(props) {
   
   const titles = {
-    'expences': 'expenses',
+    'expenses': 'expenses',
     'income': 'income',
-    'mExpenses': 'per month expences',
+    'mExpenses': 'per month expenses',
     'mIncome': 'per month income'
   }
   

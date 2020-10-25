@@ -3,7 +3,7 @@ import React from 'react'
 export default function TitleRow(props) {
   
   const titles = {
-    'expences': 'Expenses',
+    'expenses': 'Expenses',
     'income': 'Income',
     'mExpenses': 'Per Month Expenses',
     'mIncome': 'Per Month Income'
