@@ -8,7 +8,7 @@ export default function EditRecurrentItem(props) {
                                         name: props.item.name, 
                                         value: props.item.value,
                                         month: props.item.month,
-                                        yearArray: props.item.yearArray
+                                        year: props.item.year
                                     })
 
     const monthArray = [
@@ -30,9 +30,23 @@ export default function EditRecurrentItem(props) {
     const yearsArray = Array.from({length: END-START}, (x, i) => i+START)
 
     const selectedYears = useRef({
-        endYear: Math.max(...userInput.yearArray),
-        startYear: Math.min(...userInput.yearArray)
+        endYear: Math.max(...userInput.year),
+        startYear: Math.min(...userInput.year)
     })                     
+
+    const validationWarning = useRef("")
+
+    
+
+    const validateYears = (name, value) => {
+        if (name === 'startYear' && value > selectedYears.current.endYear){
+            return 'validationFailed'
+        } else if (name === 'endYear' && value < selectedYears.current.startYear){
+            return 'validationFailed'
+        } else {
+            return ""
+        }
+    }
 
     const changeMonthArray = (array, newValue) => {
         if (array.includes(newValue)){
@@ -48,7 +62,12 @@ export default function EditRecurrentItem(props) {
         
         switch (type) {
             case "select-one":
-                selectedYears.current[name] = value;
+                validationWarning.current = validateYears(name, value);
+                selectedYears.current[name] = parseInt(value);
+                setUserInput((prev) => ({
+                    ...prev,
+                    year: Array.from({length: selectedYears.current.endYear-selectedYears.current.startYear+1}, (x, i) => i+selectedYears.current.startYear)
+                  }));  
                 break;
             case "checkbox":
                 const newMonthArray = changeMonthArray(userInput.month, parseInt(name))
@@ -69,7 +88,6 @@ export default function EditRecurrentItem(props) {
         event.preventDefault(); // prevendDefault disables the devault requests on submit.
         let data = userInput;
         data.id = props.item._id['$oid']
-        data.yearArray = Array.from({length: selectedYears.current.endYear-selectedYears.current.startYear+1}, (x, i) => i+selectedYears.current.startYear)
         props.updateInDB(data, 
             props.typeOfData);
         props.setEditMode()
@@ -114,7 +132,7 @@ export default function EditRecurrentItem(props) {
                     </div>
                     <div className="inputButtons">
                         <button type="button" onClick={handleClickEditMode}>&#xf05e;</button>
-                        <button type="submit">&#xf00c;</button>
+                        <button type="submit" disabled={validationWarning.current}>&#xf00c;</button>
                     </div>
                 </div>
                 <div className="row noHower noBorderBottom">
@@ -134,6 +152,7 @@ export default function EditRecurrentItem(props) {
                             <select id="endYear" name="endYear" defaultValue={selectedYears.current.endYear} onChange={handleChange}>
                                 {yearsArray.map(year => <option value={year} key={year}>{year}</option>)}
                             </select>
+                            {validationWarning.current && <warning>End year can't be before start year.</warning>}
                         </div>
                     </div>
             </form>

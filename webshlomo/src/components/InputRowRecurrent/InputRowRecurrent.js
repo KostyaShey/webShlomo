@@ -19,6 +19,7 @@ export default function InputRowRecurrent(props) {
     ];
 
     const selectedMonth = useRef([])
+    const validationWarning = useRef("")
 
     const START=2020, END=2036;
     const yearsArray = Array.from({length: END-START}, (x, i) => i+START)
@@ -47,6 +48,20 @@ export default function InputRowRecurrent(props) {
             </label>
         )
     }
+
+    const displayValidationWarning = () => {
+        
+    }
+
+    const validateYears = (name, value) => {
+        if (name === 'startYear' && value > userInput.endYear){
+            return 'validationFailed'
+        } else if (name === 'endYear' && value < userInput.startYear){
+            return 'validationFailed'
+        } else {
+            return ""
+        }
+    }
     
     const handleChange = ({ target }) => {
         const { name, value, type } = target;
@@ -55,6 +70,7 @@ export default function InputRowRecurrent(props) {
             case "select-one":
                 console.log(name)
                 console.log(value)
+                validationWarning.current = validateYears(name, value)
                 setUserInput((prev) => ({
                     ...prev,
                     [name]: value
@@ -109,7 +125,7 @@ export default function InputRowRecurrent(props) {
                             onChange={handleChange} />
                     </div>
                     <div className="inputButtons inputButtons">
-                        <button type="submit">&#xf00c;</button>
+                        <button type="submit" disabled={validationWarning.current}>&#xf00c;</button>
                         <button type="button" onClick={() => props.setShowInputRow(!props.showInputRow)}>&#xf05e;</button>
                     </div>
                 </div>
@@ -130,6 +146,7 @@ export default function InputRowRecurrent(props) {
                             <select id="endYear" name="endYear" onChange={handleChange}>
                                 {yearsArray.map(year => <option value={year} key={year}>{year}</option>)}
                             </select>
+                            {validationWarning.current && <warning>End year can't be before start year.</warning>}
                         </div>
                     </div>
         </form>

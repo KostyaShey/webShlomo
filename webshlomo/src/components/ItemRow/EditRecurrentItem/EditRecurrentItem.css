@@ -24,3 +24,8 @@ select {
 .selects label {
     padding: 0em 1em;
 }
+
+warning {
+    padding-left: 1em;;
+    color: red;
+}
