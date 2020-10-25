@@ -19,6 +19,7 @@ export default class AppContainer extends React.Component {
         this.updateInDB = this.updateInDB.bind(this);
         this.changeMonth = this.changeMonth.bind(this);
         this.readAllCollectionsFromDB = this.readAllCollectionsFromDB.bind(this);
+        this.readMonthSummaryFromDB = this.readMonthSummaryFromDB.bind(this);
     }
 
     readFromDB(typeOfData, month, year) {
@@ -38,10 +39,24 @@ export default class AppContainer extends React.Component {
     }
 
     readAllCollectionsFromDB(month, year) {
-        const collections = ['income', 'expences', 'mExpenses', 'mIncome']
+        const collections = ['income', 'expenses', 'mExpenses', 'mIncome']
         for(var i=0; i<collections.length; i++){
             this.readFromDB(collections[i], month, year)
         } 
+    }
+
+    readMonthSummaryFromDB(month, year) {
+        fetch(`/summary`,{
+            method: 'GET',
+            headers: {
+                'Content-type': 'application/json',
+                month: month + 1, // + 1 because js getdate returns month as digits starting with 0
+                year: year
+            }
+        })
+        .then(response => response.json())
+        .then(response => response = {balance: response})
+        .then(response => this.setState(response));
     }
 
     writeToDB(newData, typeOfData) {
@@ -54,6 +69,8 @@ export default class AppContainer extends React.Component {
         })
         .then(response => response.json())
         .then(response => this.setState({[typeOfData]: response}))
+
+        this.readMonthSummaryFromDB(this.state.date.selectedMonth, this.state.date.selectedYear)
     }
 
     deleteFromDB (key, typeOfData) {
@@ -74,6 +91,8 @@ export default class AppContainer extends React.Component {
         })
         .then(response => response.json())
         .then(response => this.setState({[typeOfData]: response}))
+
+        this.readMonthSummaryFromDB(this.state.date.selectedMonth, this.state.date.selectedYear)
     }
 
     updateInDB (updatedData, typeOfData) {
@@ -87,6 +106,8 @@ export default class AppContainer extends React.Component {
         })
         .then(response => response.json())
         .then(response => this.setState({[typeOfData]: response}))
+
+        this.readMonthSummaryFromDB(this.state.date.selectedMonth, this.state.date.selectedYear)
     }
 
     changeMonth (increment) {
@@ -104,17 +125,22 @@ export default class AppContainer extends React.Component {
             newMonth = newMonth + increment;
         }
 
+        this.readMonthSummaryFromDB(newMonth, newYear)
+
         this.setState({date: {
             ...this.state.date,
             selectedMonth: newMonth,
             selectedYear: newYear
         }})
+
     }
+
+    
 
     async componentDidMount() {
         var data = {};
 
-        const collections = ['income', 'expences', 'mExpenses', 'mIncome']
+        const collections = ['income', 'expenses', 'mExpenses', 'mIncome']
         for(var i=0; i<collections.length; i++){
             data[collections[i]] = await fetch(`/fetch/${collections[i]}`,{
                 method: 'GET',
@@ -128,6 +154,8 @@ export default class AppContainer extends React.Component {
             .then(response => response.json())
         } 
 
+        this.readMonthSummaryFromDB(this.state.date.currentMonth, this.state.date.currentYear)
+
         data.loading = false;
         this.setState(data);
     }
@@ -140,6 +168,7 @@ export default class AppContainer extends React.Component {
             deleteFromDB={this.deleteFromDB}
             updateInDB={this.updateInDB} 
             changeMonth={this.changeMonth}
-            readAllCollectionsFromDB={this.readAllCollectionsFromDB}/>;
+            readAllCollectionsFromDB={this.readAllCollectionsFromDB}
+            />;
     }
 }
