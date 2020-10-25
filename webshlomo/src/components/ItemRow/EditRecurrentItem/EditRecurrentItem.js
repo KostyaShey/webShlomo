@@ -36,6 +36,8 @@ export default function EditRecurrentItem(props) {
 
     const validationWarning = useRef("")
 
+    
+
     const validateYears = (name, value) => {
         if (name === 'startYear' && value > selectedYears.current.endYear){
             return 'validationFailed'
@@ -150,6 +152,7 @@ export default function EditRecurrentItem(props) {
                             <select id="endYear" name="endYear" defaultValue={selectedYears.current.endYear} onChange={handleChange}>
                                 {yearsArray.map(year => <option value={year} key={year}>{year}</option>)}
                             </select>
+                            {validationWarning.current && <warning>End year can't be before start year.</warning>}
                         </div>
                     </div>
             </form>

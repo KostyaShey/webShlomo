@@ -49,6 +49,10 @@ export default function InputRowRecurrent(props) {
         )
     }
 
+    const displayValidationWarning = () => {
+        
+    }
+
     const validateYears = (name, value) => {
         if (name === 'startYear' && value > userInput.endYear){
             return 'validationFailed'
@@ -142,7 +146,7 @@ export default function InputRowRecurrent(props) {
                             <select id="endYear" name="endYear" onChange={handleChange}>
                                 {yearsArray.map(year => <option value={year} key={year}>{year}</option>)}
                             </select>
-                            <warning>End year can't be before start year.</warning>
+                            {validationWarning.current && <warning>End year can't be before start year.</warning>}
                         </div>
                     </div>
         </form>
