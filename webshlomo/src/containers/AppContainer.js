@@ -33,9 +33,10 @@ export default class AppContainer extends React.Component {
             }
         })
         .then(response => response.json())
-        .then(response => response = {[typeOfData]: response})
+        .then(response => response = {[typeOfData]: response.data,
+                                     [typeOfData+"Total"]: response.total[0].total })
         .then(response => this.setState(response));
-        console.log(`done fetching ${typeOfData}`)
+        console.log(`readFromDB is done fetching ${typeOfData}`)
     }
 
     readAllCollectionsFromDB(month, year) {
@@ -133,9 +134,7 @@ export default class AppContainer extends React.Component {
             selectedYear: newYear
         }})
 
-    }
-
-    
+    }  
 
     async componentDidMount() {
         var data = {};
@@ -152,6 +151,8 @@ export default class AppContainer extends React.Component {
                 }
             })
             .then(response => response.json())
+            .then(response => {data[collections[i]+'Total'] = response.total[0].total
+                return response.data})
         } 
 
         this.readMonthSummaryFromDB(this.state.date.currentMonth, this.state.date.currentYear)

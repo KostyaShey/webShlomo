@@ -1,6 +1,6 @@
 import time
 import os
-from flask import Flask
+from flask import Flask, jsonify
 from flask_pymongo import PyMongo
 from bson.json_util import dumps
 from bson.objectid import ObjectId
@@ -44,16 +44,27 @@ def fetch(type_of_data):
 
     _month = int(request.headers["month"])
     _year = int(request.headers["year"])
-    _type_of_data = request.headers["typeOfData"]
+    _type_of_data = type_of_data
 
     if _type_of_data == "expenses" or _type_of_data  == "income":
         data = mongo.db[type_of_data].find({"month": _month, "year": _year})
+        pipeline = [
+            {'$match': {'$and': [{'month': _month}, {'year': _year}]}},
+            { '$group': { '_id': 'null', 'total': { '$sum': "$value" }}}
+        ]
 
     if _type_of_data == "mExpenses" or _type_of_data  == "mIncome":
         data = mongo.db[type_of_data].find()
+        pipeline = [
+            {'$match': {'$and': [{'month': {'$elemMatch': {'$eq': _month}}}, {'year': {'$elemMatch': {'$eq': _year}}}]}},
+            { '$group': { '_id': 'null', 'total': { '$sum': "$value" }}}
+        ]
 
-    response = dumps(data)
-    return response    
+    total = mongo.db[type_of_data].aggregate(pipeline)
+
+    response = '{ "data": ' + dumps(data) + ', "total": ' + dumps(total) + '}'
+
+    return response
 
 #delete document from the collection of <type_of_data> if specific id
 @app.route('/delete/<type_of_data>', methods=['POST'])

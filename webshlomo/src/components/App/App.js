@@ -20,7 +20,7 @@ export default class App extends Component {
                     />
                 <div className="monthTable">
                     {!this.props.data.loading &&  <BalanceRow
-                        data = {this.props.data.balance}
+                        data = {this.props.data}
                         />}
                 </div>
                 <div className="monthTable">
