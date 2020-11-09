@@ -12,6 +12,22 @@ app.secret_key = "kostya"
 app.config['MONGO_URI'] = os.environ['MONGO_DB_LINK']
 mongo = PyMongo(app)
 
+def pipeline_builder(type_of_data, month, year):
+
+    if type_of_data == "expenses" or type_of_data  == "income":
+        pipeline = [
+            {'$match': {'$and': [{'month': month}, {'year': year}]}},
+            { '$group': { '_id': 'null', 'total': { '$sum': "$value" }}}
+        ]
+    if type_of_data == "mExpenses" or type_of_data  == "mIncome":
+        pipeline = [
+            {'$match': {'$and': [{'month': {'$elemMatch': {'$eq': month}}}, {'year': {'$elemMatch': {'$eq': year}}}]}},
+            { '$group': { '_id': 'null', 'total': { '$sum': "$value" }}}
+        ]
+
+    return pipeline
+
+
 @app.route('/')
 def index():
     return app.send_static_file('index.html')
@@ -48,21 +64,17 @@ def fetch(type_of_data):
 
     if _type_of_data == "expenses" or _type_of_data  == "income":
         data = mongo.db[type_of_data].find({"month": _month, "year": _year})
-        pipeline = [
-            {'$match': {'$and': [{'month': _month}, {'year': _year}]}},
-            { '$group': { '_id': 'null', 'total': { '$sum': "$value" }}}
-        ]
 
     if _type_of_data == "mExpenses" or _type_of_data  == "mIncome":
         data = mongo.db[type_of_data].find()
-        pipeline = [
-            {'$match': {'$and': [{'month': {'$elemMatch': {'$eq': _month}}}, {'year': {'$elemMatch': {'$eq': _year}}}]}},
-            { '$group': { '_id': 'null', 'total': { '$sum': "$value" }}}
-        ]
 
-    total = mongo.db[type_of_data].aggregate(pipeline)
+    total = mongo.db[type_of_data].aggregate(pipeline_builder(type_of_data, _month, _year))
+    total = dumps(total)
+    
+    if total == '[]':
+        total = '[{"_id": "null", "total": 0}]'
 
-    response = '{ "data": ' + dumps(data) + ', "total": ' + dumps(total) + '}'
+    response = '{ "data": ' + dumps(data) + ', "total": ' + total + '}'
 
     return response
 
