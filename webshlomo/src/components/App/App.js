@@ -27,6 +27,7 @@ export default class App extends Component {
                     {!this.props.data.loading && <AllRowsOfType
                             typeOfData={"expenses"}
                             data={this.props.data.expenses}
+                            total={this.props.data.expensesTotal}
                             writeToDB={this.props.writeToDB}
                             readFromDB={this.props.readFromDB}
                             deleteFromDB={this.props.deleteFromDB}
@@ -36,6 +37,7 @@ export default class App extends Component {
                     {!this.props.data.loading && <AllRowsOfType
                             typeOfData={"income"}
                             data={this.props.data.income}
+                            total={this.props.data.incomeTotal}
                             writeToDB={this.props.writeToDB}
                             readFromDB={this.props.readFromDB}
                             deleteFromDB={this.props.deleteFromDB}

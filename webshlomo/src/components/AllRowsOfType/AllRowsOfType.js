@@ -37,7 +37,7 @@ export default function AllRowsOfType(props) {
                         key={item._id['$oid']}
                         isActive={true} 
                         />)}
-                    <SumRow data={props.data} />
+                    <SumRow total={props.total} />
                     {!showInputRow && < AddRow
                         setShowInputRow={setShowInputRow}
                         showInputRow={showInputRow}

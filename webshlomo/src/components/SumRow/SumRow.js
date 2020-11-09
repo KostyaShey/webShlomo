@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 export default class SumRow extends Component {
     render() {
 
-        const valueSum = this.props.data.reduce((currentSum, array) => currentSum + array.value, 0);
 
         return (
             <div className="row">
@@ -12,7 +11,7 @@ export default class SumRow extends Component {
                   <p>Sum:</p>
                 </div>
                 <div className="value bold">
-                  <p className='numbersAlign'>{valueSum} €</p>
+                  <p className='numbersAlign'>{this.props.total} €</p>
                 </div>
                 <div className="button"></div>
             </div>
