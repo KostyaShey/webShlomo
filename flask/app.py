@@ -20,8 +20,9 @@ def pipeline_builder(type_of_data, month, year):
             { '$group': { '_id': 'null', 'total': { '$sum': "$value" }}}
         ]
     if type_of_data == "mExpenses" or type_of_data  == "mIncome":
+
         pipeline = [
-            {'$match': {'$and': [{'month': {'$elemMatch': {'$eq': month}}}, {'year': {'$elemMatch': {'$eq': year}}}]}},
+            {'$match': {'$and': [{'month': {'$elemMatch': {"$in": [month]}}}, {'year': {'$elemMatch': {"$in": [year]}}}]}},
             { '$group': { '_id': 'null', 'total': { '$sum': "$value" }}}
         ]
 
@@ -95,6 +96,17 @@ def update(type_of_data):
     _new_data['month'] = _json['month']
     _new_data['year'] = _json['year']
 
+
     id = mongo.db[type_of_data].update_one({'_id': ObjectId(_id)}, {'$set': _new_data})
 
-    return response_builder(type_of_data, _json['month'], _json['year'])
+    if type(_new_data['month']) == list:
+        _month = _json['selectedMonth']
+    else:
+        _month = _json['month']
+
+    if type(_new_data['year']) == list:
+        _year = _json['selectedYear']
+    else:
+        _year = _json['year']
+
+    return response_builder(type_of_data, _month, _year)
