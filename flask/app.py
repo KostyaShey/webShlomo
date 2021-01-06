@@ -99,14 +99,15 @@ def update(type_of_data):
 
     id = mongo.db[type_of_data].update_one({'_id': ObjectId(_id)}, {'$set': _new_data})
 
+    #required for mongodb pipelines for recurrent data
     if type(_new_data['month']) == list:
         _month = _json['selectedMonth']
     else:
-        _month = _json['month']
+        _month = _new_data['month']
 
     if type(_new_data['year']) == list:
         _year = _json['selectedYear']
     else:
-        _year = _json['year']
+        _year = _new_data['year']
 
     return response_builder(type_of_data, _month, _year)
