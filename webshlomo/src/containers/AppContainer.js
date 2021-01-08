@@ -83,7 +83,10 @@ export default class AppContainer extends React.Component {
     }
 
     updateInDB (updatedData, typeOfData) {
-              
+        
+        updatedData.selectedMonth = this.state.date.selectedMonth + 1;
+        updatedData.selectedYear = this.state.date.selectedYear;
+
         fetch(`/update/${typeOfData}`, {
             method: 'POST',
             headers: {
