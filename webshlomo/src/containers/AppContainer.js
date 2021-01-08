@@ -84,7 +84,7 @@ export default class AppContainer extends React.Component {
 
     updateInDB (updatedData, typeOfData) {
         
-        updatedData.selectedMonth = this.state.date.selectedMonth;
+        updatedData.selectedMonth = this.state.date.selectedMonth + 1;
         updatedData.selectedYear = this.state.date.selectedYear;
         console.log(typeof(updatedData))
         console.log(updatedData);
