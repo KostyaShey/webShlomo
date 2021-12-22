@@ -21,6 +21,18 @@ export default function AllRowsOfType(props) {
                         writeToDB={props.writeToDB}
                         date={props.date}
                         />
+                    {!showInputRow && < AddRow
+                        setShowInputRow={setShowInputRow}
+                        showInputRow={showInputRow}
+                        typeOfData={props.typeOfData}
+                        />}
+                    {showInputRow && <InputRow
+                        setShowInputRow={setShowInputRow}
+                        showInputRow={showInputRow}
+                        writeToDB={props.writeToDB}
+                        date={props.date}
+                        typeOfData={props.typeOfData}
+                    />}
                 </div>
             </div>
         )
@@ -49,7 +61,7 @@ export default function AllRowsOfType(props) {
                         writeToDB={props.writeToDB}
                         date={props.date}
                         typeOfData={props.typeOfData}
-                        />}
+                    />}
                 </div>
                 )
     }
